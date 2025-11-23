@@ -1,0 +1,55 @@
+--> I have an issue with Eddie Murphy last_name showing \tmurphy in json data
+Remove leading space with: 
+
+    UPDATE actor
+    SET last_name = LTRIM(last_name)
+    WHERE actor_id = 123;
+
+Remove any leading/trailing whitespace: 
+
+    UPDATE actor
+    SET last_name = TRIM(last_name)
+    WHERE actor_id = 123;
+
+Check for any bad whitespace in sql code:
+
+    SELECT actor_id, first_name, last_name
+    FROM actor
+    WHERE last_name != TRIM(last_name);
+
+Inspect the bytes to determine what the whitespace is:
+
+    SELECT
+      actor_id,
+      CONCAT(">", last_name, "<") AS shown,
+      LENGTH(last_name) AS bytes_length,
+      CHAR_LENGTH(last_name) AS chars_length,
+      HEX(SUBSTRING(last_name, 1, 1)) AS first_byte_hex,
+      HEX(last_name) AS full_hex
+    FROM actor
+    WHERE actor_id = 123;
+
+    --> returned ( 09 ) which means 'tab' <--
+        --> ( 20 ) is normal space
+        --> ( A0 ) non-breaking space
+
+SOLUTION: 
+    --> ( 09 ) tab: 
+    UPDATE actor
+    SET last_name = REPLACE(last_name, CHAR(9), '')
+    WHERE actor_id = 123;
+
+VERIFY CLEANUP
+    SELECT actor_id, CONCAT(">", last_name, "<") AS shown, LENGTH(last_name), HEX(last_name)
+    FROM actor
+    WHERE actor_id = 123;
+
+BEST SOLUTION MySQL 8+ remove any leading/trailing whitespace (tabs/newlines/ect.):
+    UPDATE actor
+    SET last_name = REGEXP_REPLACE(last_name, '^[[:space:]]+|[[:space:]]+$', '')
+    WHERE actor_id = 123;
+or for the whole table:
+    UPDATE actor
+    SET last_name = REGEXP_REPLACE(last_name, '^[[:space:]]+|[[:space:]]+$', '');
+
+

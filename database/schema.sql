@@ -85,6 +85,25 @@ MODIFY fun_fact TEXT;
 ALTER TABLE program
 MODIFY img_url VARCHAR(60);
 
+-- space in front of "murphy"
+UPDATE actor
+SET last_name = LTRIM(last_name)
+WHERE actor_id = 123;
+
+UPDATE actor
+SET last_name = TRIM(last_name)
+WHERE actor_id = 123;
+
+UPDATE actor
+SET last_name = REPLACE(last_name, CHAR(9), '')
+WHERE actor_id = 123;
+-- verify cleanup
+SELECT actor_id, CONCAT(">", last_name, "<") AS shown, LENGTH(last_name), HEX(last_name)
+FROM actor
+WHERE actor_id = 123;
+
+
+
 -- reset auto increment program table
 SET @num := 0;
 UPDATE program SET program_id = @num := (@num + 1);
