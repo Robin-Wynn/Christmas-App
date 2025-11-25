@@ -1,31 +1,116 @@
-const connect = require('../../config/dbconfig')
+const con = require('../../config/dbconfig')
+const { queryAction } = require('../../helpers/queryAction')
 
 const daoCommon = {
 
-	//create methods that will query the database
-	findAll: (req, res, table)=> {
-		
-		// .query(sql query, callback func)
-		connect.query(
+	// GET ALL
+	findAll: (res, table)=> {
+		con.execute(
 	        `SELECT * FROM ${table};`,
 	        (error, rows)=> {
-	            if (!error) {
-	                if (rows.length ===1) {
-	                    res.json(...rows)
-                    } else {
-	                    res.json(rows)
-                    }
-                } else {
-	                console.log(`Dao Error: ${error}`)
-	                    res.json({
-		                    "message": 'error',
-		                    "table": `${table}`,
-		                    'error': error
-	                    })
-                }
+	            queryAction(res, error, rows, table)
             }
         )
-    }
+    },
+
+	// GET BY ID
+	findById: (res, table, id) => {
+		con.execute(
+			`SELECT * FROM ${table} WHERE ${table}_id = ${id};`,
+			(error, rows) => {
+				queryAction(res, error, rows, table)
+			}
+
+		)
+	},
+
+	// COUNT
+	countAll: (res, table) => {
+		con.execute(
+			`SELECT COUNT(*) AS total FROM ${table};`,
+			(error, rows) => {
+				queryAction(res, error, rows, table)
+			}
+		)
+	},
+	
+	// SEARCH	 
+	search: (req, res, table) => {
+		const { field, term } = req.query
+
+		if (!field || !term) {
+			return res.json({
+				message: "Missing search field or term", 
+				example: `/program/utils/search?field=title&term=foo`
+			})
+		}
+		con.execute(
+			`SELECT * FROM ${table} WHERE ${field} LIKE ?`,
+			[`%${term}%`],
+			(error, rows) => {
+				queryAction(res, error, rows, table)
+			}
+		)
+	},
+
+	// SORT
+	sort: (res, table, sort) => {
+
+		con.execute(
+			`SELECT * FROM ${table} ORDER BY ${sort};`,
+			(error, rows) => {
+				queryAction(res, error, rows, table)
+			}
+		)
+	},
+
+	// CREATE
+	create: (req, res, table, dataObj) => {
+		dataObj = dataObj || req.body
+
+		con.query(
+			`INSERT INTO ${table} SET ?`,
+			dataObj,
+			(error, result) => {
+				if (!error) {
+					return res.json({
+						message: "created",
+						insertedId: result.insertId
+					})
+				}
+				console.log(`Dao Error: ${error}`)
+				res.json({ message: 'error', table, error })
+			}
+		)
+	},
+
+	// UPDATE
+	update: (req, res, table, dataObj, idField, idValue) => {
+		dataObj = dataObj || req.body
+		idValue = idValue || req.params?.id 
+
+		if (!idValue) {
+			return res.json({
+				message: "Missing ID parameter for update",
+				example: `/program/5`
+			})
+		}
+
+		con.query(
+			`UPDATE ${table} SET ? WHERE ${idField} = ?;`,
+			[dataObj, idValue],
+			(error, result) => {
+				if (!error) {
+					return res.json({
+						message: "updated",
+						affectedRows: result.affectedRows
+					})
+				}
+				console.log(`Dao Error: ${error}`)
+				res.json({ message: 'error', table, error })
+			}
+		)
+	}
 }
 
 
