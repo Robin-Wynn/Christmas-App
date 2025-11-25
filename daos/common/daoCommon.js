@@ -110,6 +110,31 @@ const daoCommon = {
 				res.json({ message: 'error', table, error })
 			}
 		)
+	},
+
+	// DANGER ZONE 
+	// DELETE
+	delete: (res, table, id)=> {
+		console.log(`${table}_id: ${id}`)
+
+		con.execute(
+			`DELETE from ${table} WHERE ${table}_id ${id};
+			SET @num := 0;
+			UPDATE ${table} SET ${table}_id = @num := (@num + 1);
+			ALTER TABLE ${table} AUTO_INCREMENT = 1;`,
+			(error, dbres)=> {
+				if (!error) {
+					res.send('Record Deleted')
+				} else {
+					res.json({
+						"error": true,
+						"message": error
+					})
+				}
+			}
+		)
+
+		// validate user is 100% sure they want to delete 
 	}
 }
 
