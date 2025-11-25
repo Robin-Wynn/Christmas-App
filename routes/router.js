@@ -7,7 +7,9 @@ const PORT = process.env.PORT || 1995
 router.get('/api', (req, res)=> {
     res.json({
         'All Programs': `http://localhost:${PORT}/api/program`,
-        'All Actors': `http://localhost:${PORT}/api/actor`
+        'All Actors': `http://localhost:${PORT}/api/actor`,
+        'All Directors': `http://localhost:${PORT}/api/director`,
+        'All Producers': `http://localhost:${PORT}/api/producer`
     })
 })
 
@@ -17,7 +19,9 @@ router.get('/api', (req, res)=> {
 // ALL ENDPOINTS
 const endpoints = [
     'program',
-    'actor'
+    'actor',
+    'director',
+    'producer'
 ]
 
 endpoints.forEach(endpoint => {

@@ -25,4 +25,4 @@ server.use(express.urlencoded({ extended: true }))
 // connect to our router
 server.use('/', router)
 
-server.listen(PORT, ()=> console.log(`PORTY over here (～￣▽￣)～`))
+server.listen(PORT, ()=> console.log(`Debug the Halls 🎄 with code and worry Fa La La La La`))

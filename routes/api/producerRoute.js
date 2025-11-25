@@ -1,46 +1,46 @@
 const router = require('express').Router()
-const { directorDao: dao } = require('../../daos/dao')
+const { producerDao: dao } = require('../../daos/dao')
 
-// http://localhost:1995/api/director
+// http://localhost:1995/api/producer
 router.get('/', (req, res)=> {
     dao.findAll(res, dao.table)
 })
 
 // GET by ID
-// http://localhost:1995/api/director/:id
+// http://localhost:1995/api/producer/:id
 router.get('/:id', (req, res) => {
     dao.findById(res, dao.table, req.params.id)
 })
 
 // UTILITIES --> SEARCH, SORT, COUNT
-// COUNT all directors
-// http://localhost:1995/api/director/utils/count/all
+// COUNT all producers
+// http://localhost:1995/api/producer/utils/count/all
 router.get('/utils/count/all', (req, res) => {
     dao.countAll(res, dao.table)
 })
 
-// SEARCH directors
-// http://localhost:1995/api/director/utils/search?field=first_name&term=john
+// SEARCH producers
+// http://localhost:1995/api/producer/utils/search?field=first_name&term=jim
 router.get('/utils/search', (req, res) => {
     dao.search(req, res, dao.table)
 })
 
-// SORT directors
-// http://localhost:1995/api/director/utils/sort?sort=yr_released
+// SORT producers
+// http://localhost:1995/api/producer/utils/sort?sort=yr_released
 router.get('/utils/sort', (req, res) => {
     dao.sort(res, dao.table, req.query.sort)
 })
 
-// CREATE a new director
-// http://localhost:1995/api/director/
+// CREATE a new producer
+// http://localhost:1995/api/producer/
 router.post('/', (req, res) => {
     dao.create(req, res, dao.table, req.body)
 })
 
-// UPDATE a director
-// http://localhost:1995/api/director/:id
+// UPDATE a producer
+// http://localhost:1995/api/producer/:id
 router.put('/:id', (req, res) => {
-    dao.update(req, res, dao.table, req.body, 'director_id', req.params.id)
+    dao.update(req, res, dao.table, req.body, 'producer_id', req.params.id)
 })
 
 

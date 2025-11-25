@@ -1,5 +1,4 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 const { programDao: dao } = require('../../daos/dao')
 
 // GET ALL
@@ -18,7 +17,7 @@ router.get('/:id', (req, res) => {
 // COUNT all programs
 // http://localhost:1995/api/program/utils/count/all
 router.get('/utils/count/all', (req, res) => {
-	dao.countAll(req, res, dao.table)
+	dao.countAll(res, dao.table)
 })
 
 // SEARCH programs
