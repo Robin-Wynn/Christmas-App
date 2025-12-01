@@ -7,6 +7,12 @@ router.get('/', (req, res)=> {
 	dao.findAll(res, dao.table)
 })
 
+// GET programs
+// http://localhost:1995/api/streaming_platform/:id/programs
+router.get('/:id/programs', (req, res) => {
+	dao.findPrograms(res, req.params.id)
+})
+
 // GET by ID
 // http://localhost:1995/api/streaming_platform/:id
 router.get('/:id', (req, res) => {
