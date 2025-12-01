@@ -7,11 +7,30 @@ router.get('/', (req, res)=> {
 	dao.findAll(res, dao.table)
 })
 
+// GET actors
+// http://localhost:1995/api/program/:id/actors
+router.get('/:id/actors', (req, res)=> {
+	dao.findActors(res, req.params.id)
+})
+
+// GET directors
+// http://localhost:1995/api/program/:id/directors
+router.get('/:id/directors', (req, res)=> {
+	dao.findDirectors(res, req.params.id)
+})
+
+// GET platforms
+// http://localhost:1995/api/program/:id/platforms
+router.get('/:id/platforms', (req, res)=> {
+	dao.findPlatforms(res, req.params.id)
+})
+
 // GET by ID
 // http://localhost:1995/api/program/:id
 router.get('/:id', (req, res) => {
 	dao.findById(res, dao.table, req.params.id)
 })
+
 
 // UTILITIES --> SEARCH, SORT, COUNT
 // COUNT all programs
