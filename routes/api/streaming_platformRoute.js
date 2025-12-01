@@ -13,30 +13,28 @@ router.get('/:id/programs', (req, res) => {
 	dao.findPrograms(res, req.params.id)
 })
 
-// GET by ID
-// http://localhost:1995/api/streaming_platform/:id
-router.get('/:id', (req, res) => {
-	dao.findById(res, dao.table, req.params.id)
-})
-
-
-// UTILITIES --> SEARCH, SORT, COUNT
 // COUNT all streaming_platforms
-// http://localhost:1995/api/streaming_platform/utils/count/all
-router.get('/utils/count/all', (req, res) => {
+// http://localhost:1995/api/streaming_platform/count/all
+router.get('/count/all', (req, res) => {
 	dao.countAll(res, dao.table)
 })
 
 // SEARCH streaming_platforms
-// http://localhost:1995/api/streaming_platform/utils/search?field=streaming_platform&term=hbo
-router.get('/utils/search', (req, res) => {
+// http://localhost:1995/api/streaming_platform/search?field=streaming_platform&term=hbo
+router.get('/search', (req, res) => {
 	dao.search(req, res, dao.table)
 })
 
 // SORT streaming_platforms
-// http://localhost:1995/api/streaming_platform/utils/sort?sort=streaming_platform_id
-router.get('/utils/sort', (req, res) => {
+// http://localhost:1995/api/streaming_platform/sort?sort=streaming_platform_id
+router.get('/sort', (req, res) => {
 	dao.sort(res, dao.table, req.query.sort)
+})
+
+// GET by ID
+// http://localhost:1995/api/streaming_platform/:id
+router.get('/:id', (req, res) => {
+	dao.findById(res, dao.table, req.params.id)
 })
 
 // CREATE a new streaming_platform

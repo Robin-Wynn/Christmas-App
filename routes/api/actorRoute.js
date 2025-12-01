@@ -12,29 +12,28 @@ router.get('/:id/programs', (req, res) => {
 	dao.findPrograms(res, req.params.id)
 })
 
-// GET by ID
-// http://localhost:1995/api/actor/:id
-router.get('/:id', (req, res) => {
-	dao.findById(res, dao.table, req.params.id)
-})
-
-// UTILITIES --> SEARCH, SORT, COUNT
 // COUNT all actors
-// http://localhost:1995/api/actor/utils/count/all
-router.get('/utils/count/all', (req, res) => {
+// http://localhost:1995/api/actor/count/all
+router.get('/count/all', (req, res) => {
 	dao.countAll(res, dao.table)
 })
 
 // SEARCH actors
-// http://localhost:1995/api/actor/utils/search?field=first_name&term=jim
-router.get('/utils/search', (req, res) => {
+// http://localhost:1995/api/actor/search?field=first_name&term=jim
+router.get('/search', (req, res) => {
 	dao.search(req, res, dao.table)
 })
 
 // SORT actors
-// http://localhost:1995/api/actor/utils/sort?sort=yr_released
-router.get('/utils/sort', (req, res) => {
+// http://localhost:1995/api/actor/sort?sort=yr_released
+router.get('/sort', (req, res) => {
 	dao.sort(res, dao.table, req.query.sort)
+})
+
+// GET by ID
+// http://localhost:1995/api/actor/:id
+router.get('/:id', (req, res) => {
+	dao.findById(res, dao.table, req.params.id)
 })
 
 // CREATE a new actor

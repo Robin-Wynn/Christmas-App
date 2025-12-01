@@ -41,7 +41,7 @@ const daoCommon = {
 		if (!field || !term) {
 			return res.json({
 				message: "Missing search field or term", 
-				example: `/program/utils/search?field=title&term=foo`
+				example: `/program/search?field=title&term=foo`
 			})
 		}
 		con.execute(

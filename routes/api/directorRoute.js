@@ -11,29 +11,28 @@ router.get('/:id/program', (req, res) => {
     dao.findPrograms(res, req.params.id)
 })
 
-// GET by ID
-// http://localhost:1995/api/director/:id
-router.get('/:id', (req, res) => {
-    dao.findById(res, dao.table, req.params.id)
-})
-
-// UTILITIES --> SEARCH, SORT, COUNT
 // COUNT all directors
-// http://localhost:1995/api/director/utils/count/all
-router.get('/utils/count/all', (req, res) => {
+// http://localhost:1995/api/director/count/all
+router.get('/count/all', (req, res) => {
     dao.countAll(res, dao.table)
 })
 
 // SEARCH directors
-// http://localhost:1995/api/director/utils/search?field=first_name&term=john
-router.get('/utils/search', (req, res) => {
+// http://localhost:1995/api/director/search?field=first_name&term=john
+router.get('/search', (req, res) => {
     dao.search(req, res, dao.table)
 })
 
 // SORT directors
-// http://localhost:1995/api/director/utils/sort?sort=yr_released
-router.get('/utils/sort', (req, res) => {
+// http://localhost:1995/api/director/sort?sort=yr_released
+router.get('/sort', (req, res) => {
     dao.sort(res, dao.table, req.query.sort)
+})
+
+// GET by ID
+// http://localhost:1995/api/director/:id
+router.get('/:id', (req, res) => {
+    dao.findById(res, dao.table, req.params.id)
 })
 
 // CREATE a new director

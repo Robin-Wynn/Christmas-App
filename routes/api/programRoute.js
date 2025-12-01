@@ -25,30 +25,28 @@ router.get('/:id/platforms', (req, res)=> {
 	dao.findPlatforms(res, req.params.id)
 })
 
-// GET by ID
-// http://localhost:1995/api/program/:id
-router.get('/:id', (req, res) => {
-	dao.findById(res, dao.table, req.params.id)
-})
-
-
-// UTILITIES --> SEARCH, SORT, COUNT
 // COUNT all programs
-// http://localhost:1995/api/program/utils/count/all
-router.get('/utils/count/all', (req, res) => {
+// http://localhost:1995/api/program/count/all
+router.get('/count/all', (req, res) => {
 	dao.countAll(res, dao.table)
 })
 
 // SEARCH programs
-// http://localhost:1995/api/program/utils/search?field=title&term=Gremlins
-router.get('/utils/search', (req, res) => {
+// http://localhost:1995/api/program/search?field=title&term=Gremlins
+router.get('/search', (req, res) => {
 	dao.search(req, res, dao.table)
 })
 
 // SORT programs
-// http://localhost:1995/api/program/utils/sort?sort=yr_released
-router.get('/utils/sort', (req, res) => {
+// http://localhost:1995/api/program/sort?sort=yr_released
+router.get('/sort', (req, res) => {
 	dao.sort(res, dao.table, req.query.sort)
+})
+
+// GET by ID
+// http://localhost:1995/api/program/:id
+router.get('/:id', (req, res) => {
+	dao.findById(res, dao.table, req.params.id)
 })
 
 // CREATE a new program
