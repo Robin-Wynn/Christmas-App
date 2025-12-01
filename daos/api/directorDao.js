@@ -26,11 +26,15 @@ const directorDao = {
                         programs: [],
                         explanation: "No programs were found for this director."
                     })
+
+                // extract director info from the first row
                 const director = {
                     director_id: rows[0].director_id,
                     first_name: rows[0].first_name,
                     last_name: rows[0].last_name
                 }
+
+                // extract program list
                 const programs = rows.map(r => ({
                     program_id: r.program_id,
                     title: r.title,
@@ -38,6 +42,7 @@ const directorDao = {
                     img_url: r.program_img
                 })) 
     
+                // send nested JSON
                 res.json({
                     director,
                     programs,
