@@ -7,6 +7,12 @@ router.get('/', (req, res)=> {
 })
 
 // GET by ID
+// http://localhost:1995/api/actor/:id/programs
+router.get('/:id/programs', (req, res) => {
+	dao.findPrograms(res, req.params.id)
+})
+
+// GET by ID
 // http://localhost:1995/api/actor/:id
 router.get('/:id', (req, res) => {
 	dao.findById(res, dao.table, req.params.id)
