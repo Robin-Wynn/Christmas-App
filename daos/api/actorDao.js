@@ -62,7 +62,9 @@ const actorDao = {
             	})
 			} 
 		)
-	} 
+	},
+	
+	
 }
 
 module.exports = actorDao

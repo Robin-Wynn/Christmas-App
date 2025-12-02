@@ -25,6 +25,12 @@ router.get('/:id/platforms', (req, res)=> {
 	dao.findPlatforms(res, req.params.id)
 })
 
+// GET producers
+// http://localhost:1995/api/program/:id/producers
+router.get('/:id/producers', (req, res)=> {
+	dao.findProducer(res, req.params.id)
+})
+
 // COUNT all programs
 // http://localhost:1995/api/program/count/all
 router.get('/count/all', (req, res) => {

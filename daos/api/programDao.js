@@ -45,7 +45,7 @@ const programDao = {
             	res.json({
             	    program,
             	    actors,
-            	    explanation: `Program '${program.title}' features ${actors.	length} actor(s).`
+            	    explanation: `Program '${program.title}' features ${actors.length} actor(s).`
             	})
 			}
 		)
@@ -68,7 +68,7 @@ const programDao = {
                 	return res.json({ message: "error", error })
             	}
 
-            	if (!rows.length)
+            	if (rows.length === 0)
             	    return res.json({
             	        program: null,
             	        directors: [],
@@ -114,11 +114,11 @@ const programDao = {
 			[program_id],
 			(error, rows)=> {
 				if (error) {
-                	console.log(`program -> platforms Dao Error: ${error}`);
+                	console.log(`program -> platform Dao Error: ${error}`);
                 	return res.json({ message: "error", error });
             	}
 
-            	if (!rows.length)
+            	if (rows.length === 0)
             	    return res.json({
             	        program: null,
             	        streaming_platforms: [],
@@ -142,6 +142,52 @@ const programDao = {
             	    streaming_platforms,
             	    explanation: `Program '${program.title}' is available on ${streaming_platforms.length} platform(s).`
             	})
+			}
+		)
+	},
+
+	findProducer: (res, program_id) => {
+		con.execute(
+			`SELECT 
+            	p.program_id, p.title, p.yr_released, p.img_url AS program_img,
+            	pr.producer_id, pr.producer
+        	FROM program p
+        	JOIN producer pr ON pr.producer_id = p.producer_id
+        	WHERE p.program_id = ?
+			;`,
+			[program_id],
+			(error, rows)=> {
+				if (error) {
+                	console.log(`program -> producer Dao Error: ${error}`);
+                	return res.json({ message: "error", error });
+            	}
+
+            	if (rows.length === 0)
+            	    return res.json({
+            	        program: null,
+            	        producers: [],
+            	        explanation: "There are no producers listed for this program."
+            	    })
+
+            	const program = {
+            	    program_id: rows[0].program_id,
+            	    title: rows[0].title,
+            	    yr_released: rows[0].yr_released,
+            	    img_url: rows[0].program_img
+            	}
+
+            	const producers = rows.map(r => ({
+            	    producer_id: r.producer_id,
+            	    producer: r.producer
+            	}))
+
+            	res.json({
+            	    program,
+            	    producers,
+            	    explanation: `Program '${program.title}' was produced by ${producers.length} producer(s).`
+            	})
+				
+			
 			}
 		)
 	}
