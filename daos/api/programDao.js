@@ -190,6 +190,90 @@ const programDao = {
 			
 			}
 		)
+	},
+
+	getFullProgramById: (res, program_id)=> {
+
+		const data = {
+			program: null,
+			actors: [],
+			directors: [],
+			platforms: [],
+			producer: null
+		}
+
+		// 1) Get Program
+		con.execute(
+			`SELECT * FROM program WHERE program_id = ?
+			;`,
+			[program_id],
+			(error, rows) => {
+				if (error) return queryAction(res, error, [], "program(full)")
+
+				if (rows.length === 0)
+					return res.json({ message: "Program not found", program_id })
+
+				data.program = rows[0]
+
+				// 2) Get Actors 
+				con.execute(
+					`SELECT a.*
+						FROM actor a
+					JOIN program_to_actor pa ON pa.actor_id = a.actor_id
+					WHERE pa.program_id = ?
+					;`,
+					[program_id],
+					(err2, actors) => {
+
+						if (!err2) data.actors = actors
+
+						// Get Directors
+						con.execute(
+							`SELECT d.*
+								FROM director d
+							JOIN program_to_director pd ON pd.director_id = d.director_id
+							WHERE pd.program_id = ?	
+							;`,
+							[program_id],
+							(err3, directors) => {
+
+								if (!err3) data.directors = directors 
+
+								// Get Platforms
+								con.execute(
+									`SELECT sp.*
+										FROM streaming_platform sp
+									JOIN program_to_streaming ps ON ps.streaming_platform_id = sp.streaming_platform_id
+									WHERE ps.program_id = ?
+									;`,
+									[program_id],
+									(err4, platforms) => {
+
+										if (!err4) data.platforms = platforms
+
+										// Get Producer 
+										con.execute(
+											`SELECT pr.*
+												FROM producer pr
+											JOIN program p ON p.producer_id = pr.producer_id
+											WHERE p.program_id = ?
+											;`,
+											[program_id],
+											(err5, prod) => {
+
+												if (!err5 && prod.length > 0) data.producer = prod[0]
+
+												return res.json(data)
+											}
+										)
+									}
+								)
+							}
+						)
+					}
+				)
+			}
+		)
 	}
 }
 
