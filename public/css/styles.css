@@ -1,0 +1,14 @@
+* { box-sizing: border-box;}
+
+.poster{
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+.actor-img{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+}

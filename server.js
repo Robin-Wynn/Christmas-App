@@ -22,6 +22,9 @@ server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 
+// Set engine to EJS
+server.set('view engine', 'ejs')
+
 // connect to our router
 server.use('/', router)
 

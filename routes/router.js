@@ -1,6 +1,33 @@
 const express = require('express')
 const router = express.Router()
 const PORT = process.env.PORT || 1995
+const axios = require('axios')
+router.use(express.static('public'))
+
+// Home Route 🏡 => http://localhost:1995
+router.get('/', (req, res) => {
+    res.render('pages/home', {
+        title: 'Christmas Programs Home',
+        name: "Robin's Christmas Program App 🎅🏼"
+    })
+})
+
+// Single Program 🎥=> http://localhost:1995/program/:id
+router.get('/:id', async(req, res, next) => {
+
+    const { id } = req.params
+    const url = `http://localhost:1995/api/program/${id}/full`
+    const response = await axios.get(url)
+    const data =  response.data
+
+    res.render('pages/singleProgram', {
+        title: "Robin's full program details",
+        name: "Robin's Full Program Details!",
+        data
+    })
+        
+}) 
+
 
 // CREATE ROUTES
 // root route => http://localhost:1995/api
@@ -30,10 +57,16 @@ endpoints.forEach(endpoint => {
     router.use(`/api/${endpoint}`, require(`./api/${endpoint}Route`))
 })
 
+router.use('/program', require('./api/programRoute'))
+
 // ERROR HANDLING
 router.use((req, res, next)=> {
 	res.status(404)
-	.send('<h1>404 Error this page does not exit</h1>')
+	.render('pages/error', {
+        title: 'Error Page',
+        name: 'Error',
+        message: `Oops! The page "${req.originalUrl}" doesn't exist.`
+    })
 })
 
 module.exports = router

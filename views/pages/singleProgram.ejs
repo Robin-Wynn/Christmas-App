@@ -1,0 +1,85 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+    <div class="container text-center program-header">
+        <h1><%= data.program.title %></h1>
+        <p class="year"><%= data.program.yr_released %></p>
+        <img 
+        src="/images/<%= data.program.img_url %>" alt="<%= data.program.img_url %>" class="rounded shadow-sm poster"
+        >
+    </div>
+
+    <div class="container text-center program-details">
+        <h2>Details</h2>
+
+        <ul class="list-unstyled">
+            <li>Runtime: <%= data.program.runtime %></li>
+            <li>Format: <%= data.program.format %></li>
+            <li>Rating: <%= data.program.program_rating %></li>
+            <li>Robin's Rating: <%= data.program.robins_rating %></li>
+            <li>IMDb ID: <%= data.program.IMDb_id %></li>
+        </ul>
+
+        <h3>Summary</h3>
+        <p><%= data.program.summary %></p>
+
+        <% if (data.program.fun_fact) { %>
+            <h3>Fun Fact</h3>
+            <p><%= data.program.fun_fact %></p>
+        <% } %>
+    </div>
+
+    <section class="container text-center text-capitalize section-block">
+        <h2>Actors</h2>
+
+        <% if (data.actors.length > 0) { %>
+            <ul class="list-unstyled actor-list">
+                <% data.actors.forEach(actor => { %>
+                    <li>
+                        <img src="/images/<%= actor.img_url %>" alt="" class="actor-img">
+                        <p><%= actor.first_name %> <%= actor.last_name %></p>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %> 
+            <p>No actors found.</p>
+        <% } %>
+    </section>
+
+    <section class="container text-center text-capitalize section-block">
+        <h2>Directors</h2>
+
+        <% data.directors.forEach(d => { %>
+            <p><%= d.first_name %> <%= d.last_name %></p>
+        <% }) %>
+    </section>
+
+    <section class="container text-center text-capitalize section-block">
+        <h2>Streaming On</h2>
+
+        <% if (data.platforms.length > 0) { %>
+            <ul class="list-unstyled platform-list">
+                <% data.platforms.forEach(p => { %>
+                    <li>
+                        <p><%= p.streaming_platform %></p>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %> 
+            <p>Not currently streaming.</p>            
+        <% } %>
+    </section>
+
+    <section class="container text-center text-capitalize section-block">
+        <h2>Producer</h2>
+
+        <% if (data.producer) { %>
+            <p><%= data.producer.producer %></p>
+        <% } else { %>
+            <p>No producer listed.</p>
+        <% } %>
+    </section>
+
+</main>
+
+<%- include('../partials/footer') %>
