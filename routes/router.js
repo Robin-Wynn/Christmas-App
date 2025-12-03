@@ -45,9 +45,8 @@ router.get('/programs', (req, res) => {
             res.render('pages/programs', {
                 title: 'All Christmas Programs',
                 name: "All Programs",
-                data: {
-                    program: response.data.program
-                }
+                programs: response.data
+                
             })
 
         })
