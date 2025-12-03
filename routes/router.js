@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const PORT = process.env.PORT || 1995
 const axios = require('axios')
+const paginate = require('../helpers/pagination')
 router.use(express.static('public'))
 
 // Home Route 🏡 => http://localhost:1995
@@ -39,13 +40,19 @@ router.get('/program/:id', (req, res) => {
 router.get('/programs', (req, res) => {
 
     const url = `http://localhost:1995/api/program/`
-
+    
     axios.get(url)
-        .then(response => {
+    .then(response => {
+
+            const page = parseInt(req.query.page) || 1
+            const data = response.data
+            const paginated = paginate(data, page, 5)
+
             res.render('pages/programs', {
                 title: 'All Christmas Programs',
                 name: "All Programs",
-                programs: response.data
+                programs: paginated.data,
+                pagination: paginated 
                 
             })
 

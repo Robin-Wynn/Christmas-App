@@ -6,7 +6,7 @@
 
         <div class="container program-grid">
 
-            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3" id="programRow">
+            <div class="row row-cols-2 row-cols-md-2 row-cols-lg-5 g-3" id="programRow">
 
                 <% programs.forEach(program => { %>
                     
@@ -71,6 +71,26 @@
 
             </div>
         </div>
+
+        <!-- pagination controls -->
+
+    <div class="pagination">
+
+        <% if (pagination.hasPrevPage) { %>
+
+            <a href="/programs?page= <%= pagination.currentPage - 1 %>"> ← Prev </a>
+
+        <% } %>
+
+        <span>Page <%= pagination.currentPage %> of <%= pagination.totalPages %></span>
+
+        <% if (pagination.hasNextPage) { %>
+         
+            <a href="/programs?page= <%= pagination.currentPage + 1 %>"> Next → </a>
+
+        <% } %>
+
+    </div>
 
     </main>
 
