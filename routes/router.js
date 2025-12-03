@@ -13,21 +13,45 @@ router.get('/', (req, res) => {
 })
 
 // Single Program 🎥=> http://localhost:1995/program/:id
-router.get('/:id', async(req, res, next) => {
+router.get('/program/:id', (req, res) => {
 
     const { id } = req.params
     const url = `http://localhost:1995/api/program/${id}/full`
-    const response = await axios.get(url)
-    const data =  response.data
 
-    res.render('pages/singleProgram', {
-        title: "Robin's full program details",
-        name: "Robin's Full Program Details!",
-        data
-    })
-        
+    axios.get(url)
+        .then(response => {
+            console.log("SINGLE PROGRAM DATA:", response.data)
+            res.render('pages/singleProgram', {
+                title: "Robin's full program details",
+                name: "Robin's Full Program Details!",
+                data: {
+                    program: response.data.program,
+                    actors: response.data.actors || [],
+                    directors: response.data.directors || [],
+                    platforms: response.data.platforms || [],
+                    producer: response.data.producer || null 
+                }
+            })
+        })
 }) 
 
+// All Programs 🍿=> http://localhost:1995/programs
+router.get('/programs', (req, res) => {
+
+    const url = `http://localhost:1995/api/program/`
+
+    axios.get(url)
+        .then(response => {
+            res.render('pages/programs', {
+                title: 'All Christmas Programs',
+                name: "All Programs",
+                data: {
+                    program: response.data.program
+                }
+            })
+
+        })
+})
 
 // CREATE ROUTES
 // root route => http://localhost:1995/api
@@ -41,8 +65,8 @@ router.get('/api', (req, res)=> {
     })
 })
 
-// // program endpoint
-// router.use('/api/program', require('./api/programRoute'))
+// program endpoint
+router.use('/api/program', require('./api/programRoute'))
 
 // ALL ENDPOINTS
 const endpoints = [
@@ -57,7 +81,7 @@ endpoints.forEach(endpoint => {
     router.use(`/api/${endpoint}`, require(`./api/${endpoint}Route`))
 })
 
-router.use('/program', require('./api/programRoute'))
+// router.use('/program', require('./api/programRoute'))
 
 // ERROR HANDLING
 router.use((req, res, next)=> {

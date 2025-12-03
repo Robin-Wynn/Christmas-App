@@ -1,0 +1,77 @@
+<%- include('../partials/header') %>
+
+    <main class="main" id="main">
+
+        <h1 class="display-1 main-heading text-center text-capitalize"><%= title %></h1>
+
+        <div class="container program-grid">
+
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3" id="programRow">
+
+                <% programs.forEach(program => { %>
+                    
+                    <div class="col">
+
+                        <div class="car h-100" id="programCard">
+
+                            <img src="<%= program.img_url %>" id="programPoster" alt="<%= program.title %> poster" class="img-fluid card-img-top">
+                            
+                            <div class="card-body text-center">
+
+                                <h2 class="card-title" id="programTitle">
+                                    <%= program.title %>
+                                </h2>
+
+                                <p class="card-text" id="yearReleased">
+                                    Year Released: <%= program.yr_released %>
+                                </p>
+
+                                <p class="card-text" id="programSummary">
+                                    Summary: <%= program.summary %>
+                                </p>
+
+                                <p class="card-text" id="programRating">
+                                    Rating: <%= program.rating %>
+                                </p>
+
+                                <p class="card-text" id="robinsRating">
+                                    Robin's Rating: <%= program.robins_rating %>
+                                </p>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <p class="text-body-secondary">
+                                    <a href="https://www.imdb.com/title/<%= program.IMDb_id %>" 
+                                        class="btn btn-primary"
+                                        target="_blank"
+                                        id="imdbLink"
+                                        rel="noopener noreferrer">
+
+                                        IMDb
+
+                                    </a>
+
+                                    <a href="<%= program.wikipedia_url %>" 
+                                        class="btn btn-primary"
+                                        target="_blank"
+                                        id="wikiUrl"
+                                        rel="noopener noreferrer">
+
+                                        Wikipedia
+                                    
+                                    </a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                <% }) %>
+
+            </div>
+        </div>
+
+    </main>
+
+<%- include('../partials/footer') %>
