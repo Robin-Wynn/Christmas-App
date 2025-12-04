@@ -9,61 +9,66 @@
                 <% programs.forEach(program => { %>
                     
                     <div class="col">
+                        
+                        <div class="card h-100" id="programCard">
 
-                        <div class="car h-100" id="programCard">
-
-                            <img src="/images/<%= program.img_url %>" id="programPoster" alt="<%= program.title %> poster" class="img-fluid card-img-top">
+                            <a href="/program/<%= program.program_id %>">
+    
+                                <img src="/images/<%= program.img_url %>" id="programPoster" alt="<%= program.title %> poster" class="img-fluid card-img-top">
+                                
+                            </a>
+                                <div class="card-body details">
+    
+                                    <h2 class="card-title" id="programTitle">
+                                        <%= program.title %>
+                                    </h2>
+    
+                                    <p class="card-text" id="yearReleased">
+                                        Year Released: <%= program.yr_released %>
+                                    </p>
+    
+                                    <p class="card-text" id="programSummary">
+                                        Summary: <%= program.summary %>
+                                    </p>
+    
+                                    <p class="card-text" id="programRating">
+                                        Rating: <%= program.program_rating %>
+                                    </p>
+    
+                                    <p class="card-text" id="robinsRating">
+                                        Robin's Rating: <%= program.robins_rating %>
+                                    </p>
+    
+                                </div>
+    
+                                <div class="card-footer">
+        
+                                    <p class="text-body-secondary">
+                                        <a href="https://www.imdb.com/title/<%= program.IMDb_id %>" 
+                                            class="btn btn-primary"
+                                            target="_blank"
+                                            id="imdbLink"
+                                            rel="noopener noreferrer">
+        
+                                            IMDb
+        
+                                        </a>
+        
+                                        <a href="<%= program.wikipedia_url %>" 
+                                            class="btn btn-primary"
+                                            target="_blank"
+                                            id="wikiUrl"
+                                            rel="noopener noreferrer">
+        
+                                            Wikipedia
+                                        
+                                        </a>
+                                    </p>
+                                </div>
+                                
+                            </div>
                             
-                            <div class="card-body text-center">
-
-                                <h2 class="card-title" id="programTitle">
-                                    <%= program.title %>
-                                </h2>
-
-                                <p class="card-text" id="yearReleased">
-                                    Year Released: <%= program.yr_released %>
-                                </p>
-
-                                <p class="card-text" id="programSummary">
-                                    Summary: <%= program.summary %>
-                                </p>
-
-                                <p class="card-text" id="programRating">
-                                    Rating: <%= program.program_rating %>
-                                </p>
-
-                                <p class="card-text" id="robinsRating">
-                                    Robin's Rating: <%= program.robins_rating %>
-                                </p>
-
-                            </div>
-
-                            <div class="card-footer">
-
-                                <p class="text-body-secondary">
-                                    <a href="https://www.imdb.com/title/<%= program.IMDb_id %>" 
-                                        class="btn btn-primary"
-                                        target="_blank"
-                                        id="imdbLink"
-                                        rel="noopener noreferrer">
-
-                                        IMDb
-
-                                    </a>
-
-                                    <a href="<%= program.wikipedia_url %>" 
-                                        class="btn btn-primary"
-                                        target="_blank"
-                                        id="wikiUrl"
-                                        rel="noopener noreferrer">
-
-                                        Wikipedia
-                                    
-                                    </a>
-                                </p>
-                            </div>
-
-                        </div>
+                        
                     </div>
                 <% }) %>
 

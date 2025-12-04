@@ -13,9 +13,9 @@ server.use(helmet.contentSecurityPolicy({
 	crossOriginResourcePolicy: false,
 	crossOriginEmbedderPolicy: false,
 	directive: {
-	"img-src": [" ' self ' ", "https: data"],
-	"scriptSrc": [" ' self ' ", "cdn.jsdelivr.net"]
-}
+		"img-src": [" ' self ' ", "https: data"],
+		"scriptSrc": [" ' self ' ", "cdn.jsdelivr.net",]
+	}
 }))
 
 server.use(cors())

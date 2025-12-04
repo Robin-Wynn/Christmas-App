@@ -87,8 +87,6 @@ endpoints.forEach(endpoint => {
     router.use(`/api/${endpoint}`, require(`./api/${endpoint}Route`))
 })
 
-// router.use('/program', require('./api/programRoute'))
-
 // ERROR HANDLING
 router.use((req, res)=> {
 	res.status(404)
