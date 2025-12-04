@@ -90,11 +90,10 @@ endpoints.forEach(endpoint => {
 // router.use('/program', require('./api/programRoute'))
 
 // ERROR HANDLING
-router.use((req, res, next)=> {
+router.use((req, res)=> {
 	res.status(404)
 	.render('pages/error', {
-        title: 'Error Page',
-        name: 'Error',
+        title: '404 Not Found',
         message: `Oops! The page "${req.originalUrl}" doesn't exist.`
     })
 })
