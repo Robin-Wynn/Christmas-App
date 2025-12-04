@@ -65,51 +65,84 @@ const daoCommon = {
 	},
 
 	// CREATE
-	create: (req, res, table, dataObj) => {
-		dataObj = dataObj || req.body
+	create: (req, res, table) => {
 
-		con.query(
-			`INSERT INTO ${table} SET ?`,
-			dataObj,
-			(error, result) => {
-				if (!error) {
-					return res.json({
-						message: "created",
-						insertedId: result.insertId
-					})
+		if (Object.keys(req.body).length === 0) {
+			// Object.keys(obj) => array of keys
+			res.json({
+				"error": true,
+				"message": "No fields to create"
+			})
+		} else {
+			const fields = Object.keys(req.body)
+			const values = Object.values(req.body)
+			/**
+			 * 
+			 * req.body = {
+			 * 		title: 'program',
+			 * 		rating: 'G',
+			 * 		yr_released: 2000,
+			 * 		img_url: 'picture.jpg'
+			 * }
+			 * 
+			 * fields = [title, rating, yr_released, img_url]
+			 * values = ['program', 'G', 2000, 'picture.jpg]
+			 * 
+			 */
+
+			con.execute(
+				`INSERT INTO ${table} SET ${fields.join(' = ?, 	')} = ?
+				;`,
+				values,
+				(error, dbres)=> {
+					if (!error){
+						console.log(dbres)
+						res.render('pages/success', {
+							title: 'Success',
+							name: 'Success'
+						})
+					} else {
+						console.log(`${table}Dao error: `, error)
+					}
 				}
-				console.log(`Dao Error: ${error}`)
-				res.json({ message: 'error', table, error })
-			}
-		)
+			)
+		}
+
 	},
 
 	// UPDATE
-	update: (req, res, table, dataObj, idField, idValue) => {
-		dataObj = dataObj || req.body
-		idValue = idValue || req.params?.id 
-
-		if (!idValue) {
-			return res.json({
-				message: "Missing ID parameter for update",
-				example: `/program/5`
+	update: (req, res, table) => {
+		// check if id == number
+		if (isNaN(req.params.id)) {
+			res.json({
+				"error": true,
+				"message": "No fields to update"
 			})
-		}
+		} else {
 
-		con.query(
-			`UPDATE ${table} SET ? WHERE ${idField} = ?;`,
-			[dataObj, idValue],
-			(error, result) => {
-				if (!error) {
-					return res.json({
-						message: "updated",
-						affectedRows: result.affectedRows
-					})
+			const fields = Object.keys(req.body)
+			const values = Object.values(req.body)
+
+			con.execute(
+				`UPDATE ${table} SET ${fields.join(' = ?, ')} = ? WHERE ${table}_id = ?
+				;`,
+				[...values, req.params.id],
+				(error, dbres)=> {
+					if (!error) {
+						res.json({
+							"status": 'updated',
+							"changedRows": dbres.changedRows
+						})
+					} else {
+						res.json({
+							"error": true,
+							"message": error 
+						})
+					}
 				}
-				console.log(`Dao Error: ${error}`)
-				res.json({ message: 'error', table, error })
-			}
-		)
+			)
+
+		}
 	},
 
 	// DANGER ZONE 

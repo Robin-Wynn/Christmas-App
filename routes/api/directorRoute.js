@@ -12,8 +12,8 @@ router.get('/:id/program', (req, res) => {
 })
 
 // COUNT all directors
-// http://localhost:1995/api/director/count/all
-router.get('/count/all', (req, res) => {
+// http://localhost:1995/api/director/count
+router.get('/count', (req, res) => {
     dao.countAll(res, dao.table)
 })
 

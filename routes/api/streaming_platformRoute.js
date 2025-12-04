@@ -14,8 +14,8 @@ router.get('/:id/programs', (req, res) => {
 })
 
 // COUNT all streaming_platforms
-// http://localhost:1995/api/streaming_platform/count/all
-router.get('/count/all', (req, res) => {
+// http://localhost:1995/api/streaming_platform/count
+router.get('/count', (req, res) => {
 	dao.countAll(res, dao.table)
 })
 

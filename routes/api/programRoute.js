@@ -38,8 +38,8 @@ router.get('/:id/full', (req, res) => {
 })
 
 // COUNT all programs
-// http://localhost:1995/api/program/count/all
-router.get('/count/all', (req, res) => {
+// http://localhost:1995/api/program/count
+router.get('/count', (req, res) => {
 	dao.countAll(res, dao.table)
 })
 

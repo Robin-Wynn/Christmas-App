@@ -13,8 +13,8 @@ router.get('/:id/programs', (req, res) => {
 })
 
 // COUNT all actors
-// http://localhost:1995/api/actor/count/all
-router.get('/count/all', (req, res) => {
+// http://localhost:1995/api/actor/count
+router.get('/count', (req, res) => {
 	dao.countAll(res, dao.table)
 })
 

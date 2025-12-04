@@ -7,8 +7,8 @@ router.get('/', (req, res)=> {
 })
 
 // COUNT all producers
-// http://localhost:1995/api/producer/count/all
-router.get('/count/all', (req, res) => {
+// http://localhost:1995/api/producer/count
+router.get('/count', (req, res) => {
     dao.countAll(res, dao.table)
 })
 
