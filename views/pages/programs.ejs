@@ -27,9 +27,11 @@
                                         Year Released: <%= program.yr_released %>
                                     </p>
     
-                                    <p class="card-text" id="programSummary">
+                                    <p class="card-text programSummary" data-id="<%= program.program_id%>">
                                         Summary: <%= program.summary %>
                                     </p>
+
+                                    <button type="button" class="btn btn-danger read-more-btn" data-btnId="<%= program.program_id %>">Read More</button>
     
                                     <p class="card-text" id="programRating">
                                         Rating: <%= program.program_rating %>
