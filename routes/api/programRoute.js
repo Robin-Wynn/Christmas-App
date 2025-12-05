@@ -62,14 +62,14 @@ router.get('/:id', (req, res) => {
 })
 
 // CREATE a new program
-// http://localhost:1995/api/program/
-router.post('/', (req, res) => {
+// http://localhost:1995/api/program/create
+router.post('/create', (req, res) => {
 	dao.create(req, res, dao.table, req.body)
 })
 
 // UPDATE a program
-// http://localhost:1995/api/program/:id
-router.put('/:id', (req, res) => {
+// http://localhost:1995/api/program/update/:id
+router.patch('/update/:id', (req, res) => {
 	dao.update(req, res, dao.table, req.body, 'program_id', req.params.id)
 })
 

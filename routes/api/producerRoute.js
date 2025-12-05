@@ -31,14 +31,14 @@ router.get('/:id', (req, res) => {
 })
 
 // CREATE a new producer
-// http://localhost:1995/api/producer/
-router.post('/', (req, res) => {
+// http://localhost:1995/api/producer/create
+router.post('/create', (req, res) => {
     dao.create(req, res, dao.table, req.body)
 })
 
 // UPDATE a producer
-// http://localhost:1995/api/producer/:id
-router.put('/:id', (req, res) => {
+// http://localhost:1995/api/producer/update/:id
+router.patch('/update/:id', (req, res) => {
     dao.update(req, res, dao.table, req.body, 'producer_id', req.params.id)
 })
 

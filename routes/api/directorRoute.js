@@ -36,14 +36,14 @@ router.get('/:id', (req, res) => {
 })
 
 // CREATE a new director
-// http://localhost:1995/api/director/
-router.post('/', (req, res) => {
+// http://localhost:1995/api/director/create
+router.post('/create', (req, res) => {
     dao.create(req, res, dao.table, req.body)
 })
 
 // UPDATE a director
-// http://localhost:1995/api/director/:id
-router.put('/:id', (req, res) => {
+// http://localhost:1995/api/director/update/:id
+router.patch('/update/:id', (req, res) => {
     dao.update(req, res, dao.table, req.body, 'director_id', req.params.id)
 })
 

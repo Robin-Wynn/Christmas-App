@@ -37,14 +37,14 @@ router.get('/:id', (req, res) => {
 })
 
 // CREATE a new actor
-// http://localhost:1995/api/actor/
-router.post('/', (req, res) => {
+// http://localhost:1995/api/actor/create
+router.post('/create', (req, res) => {
 	dao.create(req, res, dao.table, req.body)
 })
 
 // UPDATE a actor
-// http://localhost:1995/api/actor/:id
-router.put('/:id', (req, res) => {
+// http://localhost:1995/api/actor/update/:id
+router.patch('/update/:id', (req, res) => {
 	dao.update(req, res, dao.table, req.body, 'actor_id', req.params.id)
 })
 

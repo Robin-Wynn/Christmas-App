@@ -38,14 +38,14 @@ router.get('/:id', (req, res) => {
 })
 
 // CREATE a new streaming_platform
-// http://localhost:1995/api/streaming_platform/
-router.post('/', (req, res) => {
+// http://localhost:1995/api/streaming_platform/create
+router.post('/create', (req, res) => {
 	dao.create(req, res, dao.table, req.body)
 })
 
 // UPDATE a streaming_platform
-// http://localhost:1995/api/streaming_platform/:id
-router.put('/:id', (req, res) => {
+// http://localhost:1995/api/streaming_platform/update/:id
+router.patch('/update/:id', (req, res) => {
 	dao.update(req, res, dao.table, req.body, 'streaming_platform_id', req.params.id)
 })
 
