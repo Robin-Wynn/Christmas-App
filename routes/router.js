@@ -59,6 +59,15 @@ router.get('/programs', (req, res) => {
         })
 })
 
+// actor form => http://localhost:1995/actor-form
+router.get('/actor-form', (req, res)=> {
+    res.render('pages/actorForm', {
+        title: 'Actor Form',
+        name: 'actor-form'
+    })
+})
+
+
 // CREATE ROUTES
 // root route => http://localhost:1995/api
 router.get('/api', (req, res)=> {
