@@ -21,7 +21,7 @@ router.get('/program/:id', (req, res) => {
 
     axios.get(url)
         .then(response => {
-            console.log("SINGLE PROGRAM DATA:", response.data)
+            // console.log("SINGLE PROGRAM DATA:", response.data)
             res.render('pages/singleProgram', {
                 title: "Robin's full program details",
                 name: "Robin's Full Program Details!",
@@ -42,7 +42,7 @@ router.get('/programs', (req, res) => {
     const url = `http://localhost:1995/api/program/`
     
     axios.get(url)
-    .then(response => {
+        .then(response => {
 
             const page = parseInt(req.query.page) || 1
             const data = response.data
@@ -65,6 +65,44 @@ router.get('/actor-form', (req, res)=> {
         title: 'Actor Form',
         name: 'actor-form'
     })
+})
+
+// actors route => http://localhost:1995/actors
+router.get('/actors', (req, res)=> {
+
+    const url = `http://localhost:1995/api/actor/`
+
+    axios.get(url)
+    .then(response => {
+
+        const page = parseInt(req.query.page) || 1
+        const data = response.data
+        const paginated = paginate(data, page, 20)
+    
+        res.render('pages/actors', {
+            title: 'All Actors',
+            name: 'Actors Page',
+            actors: paginated.data,
+            pagination: paginated
+        })
+
+    })
+
+})
+
+// actor - programs route => http://localhost:1995/api/actor/:id/programs
+router.get('/actor/:id/programs', (req, res)=> {
+
+    const { id } = req.params
+    const url = `http://localhost:1995/api/actor/${id}/programs`
+
+    axios.get(url)
+        .then(response => {
+            res.render('pages/actorPrograms', {
+                title: "Programs Featuring This Actor",
+                data: response.data.programs
+            })
+        })
 })
 
 
