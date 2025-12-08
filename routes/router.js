@@ -22,7 +22,7 @@ router.get('/program/:id', (req, res) => {
     axios.get(url)
         .then(response => {
             // console.log("SINGLE PROGRAM DATA:", response.data)
-            res.render('pages/singleProgram', {
+            res.render('pages/single-program', {
                 title: "Robin's full program details",
                 name: "Robin's Full Program Details!",
                 data: {
@@ -61,7 +61,7 @@ router.get('/programs', (req, res) => {
 
 // actor form => http://localhost:1995/actor-form
 router.get('/actor-form', (req, res)=> {
-    res.render('pages/actorForm', {
+    res.render('pages/actor-form', {
         title: 'Actor Form',
         name: 'actor-form'
     })
@@ -98,7 +98,7 @@ router.get('/actor/:id/programs', (req, res)=> {
 
     axios.get(url)
         .then(response => {
-            res.render('pages/actorPrograms', {
+            res.render('pages/actor-programs', {
                 title: "Programs Featuring This Actor",
                 data: response.data.programs
             })
