@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+
+    <div class="container">
+
+        <form 
+            action="http://localhost:1995/api/streaming_platform/create" 
+            method="post"
+            class="row g-3 form"
+            id="streaming_platformForm"
+        >
+
+        <div class="col-md-6">
+            <label for="streaming_platform" class="form-label">
+                Streaming Platform:
+            </label>
+
+            <input 
+                type="text" class="form-control"
+                id="streamingPlatform"
+                name="streaming_platform"
+            />
+
+        </div>
+
+        <button 
+            class="btn btn-primary"
+            type="submit"
+            role="button"
+        >Add Streaming Platform</button>
+        </form>
+    </div>
+
+</main>
+
+<%- include('../partials/footer') %>

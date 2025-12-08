@@ -36,7 +36,25 @@ router.get('/program/:id', (req, res) => {
         })
 }) 
 
-// All Programs 🍿=> http://localhost:1995/programs
+// Forms 📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜
+// actor form => http://localhost:1995/actor-form
+router.get('/actor-form', (req, res)=> {
+    res.render('pages/actor-form', {
+        title: 'Actor Form',
+        name: 'actor-form'
+    })
+})
+
+// streaming-plaform-form => http://localhost:1995/api/streaming_platform/create
+router.get('/streaming-platform-form', (req, res)=> {
+    res.render('pages/streaming-platform-form', {
+        title: "Streaming Platform Form",
+        name: "streaming-platform form"
+    })
+})
+
+// Full page datas 🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁
+// All Programs 🍿 => http://localhost:1995/programs
 router.get('/programs', (req, res) => {
 
     const url = `http://localhost:1995/api/program/`
@@ -53,21 +71,11 @@ router.get('/programs', (req, res) => {
                 name: "All Programs",
                 programs: paginated.data,
                 pagination: paginated 
-                
             })
-
         })
 })
 
-// actor form => http://localhost:1995/actor-form
-router.get('/actor-form', (req, res)=> {
-    res.render('pages/actor-form', {
-        title: 'Actor Form',
-        name: 'actor-form'
-    })
-})
-
-// actors route => http://localhost:1995/actors
+// All Actors 🎭 => http://localhost:1995/actors
 router.get('/actors', (req, res)=> {
 
     const url = `http://localhost:1995/api/actor/`
@@ -85,11 +93,24 @@ router.get('/actors', (req, res)=> {
             actors: paginated.data,
             pagination: paginated
         })
-
     })
-
 })
 
+// All Streaming-platforms 📺 => http://localhost:1995/api/streaming_platform
+router.get('/streaming-platforms', (req, res)=> {
+
+    const url = `http://localhost:1995/api/streaming_platform/`
+
+    axios.get(url)
+    .then(response => {
+        res.render('pages/streaming-platforms', {
+            title: "All Streaming Platforms",
+            platforms: response.data
+        })
+    })
+})
+
+// Pages to programs 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️
 // actor - programs route => http://localhost:1995/api/actor/:id/programs
 router.get('/actor/:id/programs', (req, res)=> {
 
@@ -97,50 +118,34 @@ router.get('/actor/:id/programs', (req, res)=> {
     const url = `http://localhost:1995/api/actor/${id}/programs`
 
     axios.get(url)
-        .then(response => {
-            res.render('pages/actor-programs', {
-                title: "Programs Featuring This Actor",
-                data: response.data.programs
-            })
+    .then(response => {
+        res.render('pages/actor-programs', {
+            title: "Programs Featuring This Actor",
+            data: response.data.programs
         })
+    })
 })
 
-// streaming-platforms-programs => http://localhost:1995/api/streaming_platform/:id/programs
+// streaming-platforms - programs => http://localhost:1995/api/streaming_platform/:id/programs
 router.get('/streaming_platform/:id/programs', (req, res)=> {
 
     const { id } = req.params
     const url = `http://localhost:1995/api/streaming_platform/${id}/programs`
 
     axios.get(url)
-        .then(response => {
-            console.log(response.data)
-
-            const page = parseInt(req.query.page) || 1
-            const allPrograms = response.data.programs
-            const paginated = paginate(allPrograms, page, 10)
-
-            res.render('pages/streaming-platform-programs', {
-                title: "Programs Currently Streaming",
-                streaming_platform: response.data.streaming_platform,
-                data: paginated.data,
-                explanation: response.data.explanation,
-                pagination: paginated 
-            })
+    .then(response => {
+        // console.log(response.data)
+        const page = parseInt(req.query.page) || 1
+        const allPrograms = response.data.programs
+        const paginated = paginate(allPrograms, page, 10)
+        res.render('pages/streaming-platform-programs', {
+            title: "Programs Currently Streaming",
+            streaming_platform: response.data.streaming_platform,
+            data: paginated.data,
+            explanation: response.data.explanation,
+            pagination: paginated 
         })
-})
-
-// streaming-platforms => http://localhost:1995/api/streaming_platform
-router.get('/streaming-platforms', (req, res)=> {
-
-    const url = `http://localhost:1995/api/streaming_platform/`
-
-    axios.get(url)
-        .then(response => {
-            res.render('pages/streaming-platforms', {
-                title: "All Streaming Platforms",
-                platforms: response.data
-            })
-        })
+    })
 })
 
 // CREATE ROUTES
@@ -175,8 +180,8 @@ endpoints.forEach(endpoint => {
 router.use((req, res)=> {
 	res.status(404)
 	.render('pages/error', {
-        title: '404 Not Found',
-        message: `Oops! The page "${req.originalUrl}" doesn't exist.`
+        title: '404 Not Found',       
+        message: `Oops! The page "${req.originalUrl}" doesn't exist.` //req.originalUrl is an express request property, it gives the full URL path exactly as the client requested it
     })
 })
 
