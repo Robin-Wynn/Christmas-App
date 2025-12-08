@@ -2,6 +2,18 @@
 
     <main class="main" id="main">
 
+        <div class="container">
+
+            <nav class="nav justify-content-center">
+
+                <a href="/" class="nav-link">Home</a>
+
+                <a href="#" class="nav-link">Program Form</a>
+
+            </nav>
+
+        </div>
+
         <div class="container program-grid">
 
             <div class="row row-cols-2 row-cols-md-2 row-cols-lg-5 g-3" id="programRow">
@@ -12,7 +24,7 @@
                         
                         <div class="card h-100" id="programCard">
 
-                            <a href="/program/<%= program.program_id %>">
+                            <a href="/program/<%= program.program_id %>" class="single-program-link">
     
                                 <img src="/images/<%= program.img_url %>" id="programPoster" alt="<%= program.title %> poster" class="img-fluid card-img-top">
                                 

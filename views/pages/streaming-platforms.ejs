@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+
+    <div class="container">
+
+        <nav class="nav justify-content-center">
+
+            <a href="/" class="nav-link">Home</a>
+
+            <a href="#" class="nav-link">Streaming-Platform Form</a>
+
+        </nav>
+
+    </div>
+
+    <div class="container streaming-grid">
+
+        <div class="row row-cols-2 row-col-md-2 row-cols-lg-5 g-3" id="platformRow">
+
+            <% platforms.forEach(platform => { %>
+             
+                <div class="col">
+    
+                    <a href="/streaming_platform/<%= platform.streaming_platform_id %>/programs" class="single-platform-link">
+    
+                        <h2 class="streaming-platform-name">
+                            <%= platform.streaming_platform %>
+                        </h2>
+    
+                    </a>
+                </div>
+            <% }) %>
+
+        </div>
+    </div>
+
+</main>
+
+<%- include('../partials/footer') %>

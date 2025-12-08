@@ -105,6 +105,43 @@ router.get('/actor/:id/programs', (req, res)=> {
         })
 })
 
+// streaming-platforms-programs => http://localhost:1995/api/streaming_platform/:id/programs
+router.get('/streaming_platform/:id/programs', (req, res)=> {
+
+    const { id } = req.params
+    const url = `http://localhost:1995/api/streaming_platform/${id}/programs`
+
+    axios.get(url)
+        .then(response => {
+            console.log(response.data)
+
+            const page = parseInt(req.query.page) || 1
+            const allPrograms = response.data.programs
+            const paginated = paginate(allPrograms, page, 10)
+
+            res.render('pages/streaming-platform-programs', {
+                title: "Programs Currently Streaming",
+                streaming_platform: response.data.streaming_platform,
+                data: paginated.data,
+                explanation: response.data.explanation,
+                pagination: paginated 
+            })
+        })
+})
+
+// streaming-platforms => http://localhost:1995/api/streaming_platform
+router.get('/streaming-platforms', (req, res)=> {
+
+    const url = `http://localhost:1995/api/streaming_platform/`
+
+    axios.get(url)
+        .then(response => {
+            res.render('pages/streaming-platforms', {
+                title: "All Streaming Platforms",
+                platforms: response.data
+            })
+        })
+})
 
 // CREATE ROUTES
 // root route => http://localhost:1995/api

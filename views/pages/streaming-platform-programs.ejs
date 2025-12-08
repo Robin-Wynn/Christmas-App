@@ -1,0 +1,111 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+
+    
+    <% if (data.length === 0) { %>
+        <p class="text-center">No programs available on this platform.</p>
+    <% } else { %>
+            
+        <div class="container text-center platform-header">
+        
+            <h1><%= streaming_platform.streaming_platform %></h1>
+            <p><%= explanation %></p>
+        
+        </div>
+        
+    <div class="container program-grid">
+
+        <div class="row row-cols-2 row-cols-md-2 row-cols-lg-5 g-3">
+
+            <% data.forEach(p => { %>
+
+                <div class="col">
+                        
+                    <div class="card h-100" id="programCard">
+
+                        <a href="/program/<%= p.program_id %>" class="single-program-link">
+    
+                            <img src="/images/<%= p.img_url %>" id="programPoster" alt="<%= p.title %> poster" class="img-fluid card-img-top">
+                                
+                        </a>
+
+                        <div class="card-body details">
+    
+                            <h2 class="card-title" id="programTitle">
+                                <%= p.title %>
+                            </h2>
+    
+                            <p class="card-text" id="yearReleased">
+                                Year Released: <%= p.yr_released %>
+                            </p>
+
+                            <p class="card-text" id="programRating">
+                                        Rating: <%= p.program_rating %>
+                                    </p>
+    
+                                    <p class="card-text" id="robinsRating">
+                                        Robin's Rating: <%= p.robins_rating %>
+                                    </p>
+
+                        </div>
+    
+                        <div class="card-footer">
+        
+                            <p class="text-body-secondary">
+                                <a href="https://www.imdb.com/title/<%= p.IMDb_id %>" 
+                                    class="btn btn-primary"
+                                    target="_blank"
+                                    id="imdbLink"
+                                    rel="noopener noreferrer">
+
+                                    IMDb
+        
+                                </a>
+        
+                                <a href="<%= p.wikipedia_url %>" 
+                                    class="btn btn-primary"
+                                    target="_blank"
+                                    id="wikiUrl"
+                                    rel="noopener noreferrer">
+
+                                    Wikipedia
+                                        
+                                </a>
+                            </p>
+                        </div>
+                                
+                    </div>
+                            
+                        
+                </div>
+                     
+            <% }) %>
+        </div>
+
+    </div>
+
+    <!-- pagination controls -->
+
+    <div class="pagination">
+
+        <% if (pagination.hasPrevPage) { %>
+
+            <a href="/streaming_platform/<%= streaming_platform.streaming_platform_id %>/programs?page= <%= pagination.currentPage - 1 %>"> ← Prev </a>
+
+        <% } %>
+
+        <span>Page <%= pagination.currentPage %> of <%= pagination.totalPages %></span>
+
+        <% if (pagination.hasNextPage) { %>
+         
+            <a href="/streaming_platform/<%= streaming_platform.streaming_platform_id %>/programs?page= <%= pagination.currentPage + 1 %>"> Next → </a>
+
+        <% } %>
+
+    </div>
+
+    <% } %>
+</main>
+
+<%- include('../partials/footer') %>

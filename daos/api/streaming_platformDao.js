@@ -7,7 +7,8 @@ const streaming_platformDao = {
         con.execute(
             `SELECT 
                 s.streaming_platform_id, s.streaming_platform,
-                p.program_id, p.title, p.yr_released, p.img_url AS program_img
+                p.program_id, p.title, p.yr_released, p.program_rating, p.robins_rating,
+                p.IMDb_id, p.wikipedia_url, p.img_url AS program_img
             FROM streaming_platform s
             JOIN program_to_streaming ps ON ps.streaming_platform_id = s.streaming_platform_id
             JOIN program p ON ps.program_id = p.program_id
@@ -36,7 +37,11 @@ const streaming_platformDao = {
                     program_id: r.program_id,
                     title: r.title,
                     yr_released: r.yr_released,
-                    img_url: r.program_img
+                    img_url: r.program_img,
+                    IMDb_id: r.IMDb_id,
+                    wikipedia_url: r.wikipedia_url,
+                    program_rating: r.program_rating,
+                    robins_rating: r.robins_rating
                 }))
 
                 res.json({
