@@ -1,0 +1,221 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+
+    <div class="container">
+
+        <form 
+            action="http://localhost:1995/api/program/create" 
+            method="post"
+            class="row g-3 form"
+            id="createForm"
+        >
+
+        <div class="col-md-6">
+            <label for="title" class="form-label">
+                Title:
+            </label>
+
+            <input 
+                type="text" 
+                class="form-control"
+                id="titleCreate"
+                name="title"
+                required
+            />
+
+        </div>
+
+        <div class="col-md-6">
+            <label for="yr_released" class="form-label">
+                Year Released:
+            </label>
+
+            <input 
+                type="number" 
+                class="form-control"
+                id="yr_releasedCreate"
+                name="yr_released"
+                placeholder="1995"
+            />
+
+        </div>
+
+        <div class="col-md-6">
+            <label for="runtime" class="form-label">
+                Runtime:
+            </label>
+
+            <input 
+                type="time" 
+                class="form-control"
+                id="runtimeCreate"
+                name="runtime"
+                placeholder="'00:02:00' for 2 hours"
+            />
+
+        </div>
+
+<!-- This is tricky tricky -->
+        <div class="col-md-6">
+            <label for="producer_id" class="form-label">
+                Producer ID:
+            </label>
+
+            <input 
+                type="text" 
+                class="form-control"
+                id="producer_idCreate"
+                name="producer_id"
+                placeholder="Producer ID #"
+            />
+
+        </div>
+
+        <div class="col-md-6">
+            <label for="format" class="form-label">
+                Format:
+            </label>
+
+            <select 
+                class="form-select"    
+                name="format" 
+                id="formatCreate"
+            >
+                <option value="">-- Choose Format --</option>
+                <option value="live-action">Live Action</option>
+                <option value="stop-motion">Stop Motion</option>
+                <option value="animation">Animation</option>
+                <option value="motion-capture">Motion Capture</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="program_rating" class="form-label">
+                Program Rating:
+            </label>
+
+            <select 
+                class="form-select"
+                id="program_ratingCreate"
+                name="program_rating"
+            >
+                <option value="">-- Choose Rating --</option>
+                <option value="G">G</option>
+                <option value="PG">PG</option>
+                <option value="PG-13">PG-13</option>
+                <option value="R">R</option>
+                <option value="NC-17">NC-17</option>
+                <option value="NR">NR</option>
+                <option value="MA">MA</option>
+
+            </select>
+
+        </div>
+<!-- validate it's me somehow obviously -->
+        <div class="col-md-6">
+            <label for="robins_rating" class="form-label">
+                Robin's Rating:
+            </label>
+
+            <select 
+                class="form-select"
+                id="robins_ratingCreate"
+                name="robins_rating"
+            >
+                <option value="NA">NA</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-6">
+            <label for="IMDb_id" class="form-label">
+                IMDb ID:
+            </label>
+
+            <input 
+                type="text" 
+                class="form-control"
+                id="IMDb_idCreate"
+                name="IMDb_id"
+                placeholder="ex: tt0095016"
+            />
+
+        </div>
+
+        <div class="col-md-6">
+            <label for="wikipedia_url" class="form-label">
+                Wikipedia URL:
+            </label>
+
+            <input 
+                type="text" 
+                class="form-control"
+                id="wikipedia_urlCreate"
+                name="wikipedia_url"
+                placeholder="ex: https://en.wikipedia.org/wiki/Die_Hard"
+            />
+
+        </div>
+
+        <div class="col-md-6">
+            <label for="img_url" class="form-label">
+                Program poster:
+            </label>
+
+            <input 
+                type="text" 
+                class="form-control"
+                id="img_urlCreate"
+                name="img_url"
+                placeholder="ex: Die_Hard_poster.jpg "
+            />
+
+        </div>
+
+        <div class="col-12">
+            <label for="summary" class="form-label">
+                Summary:
+            </label>
+
+            <textarea 
+                class="form-control"
+                id="summaryCreate"
+                name="summary"
+                rows="3"
+            ></textarea>
+
+        </div>
+
+        <div class="col-12">
+            <label for="fun_fact" class="form-label">
+                Fun Fact:
+            </label>
+
+            <textarea 
+                class="form-control"
+                id="fun_factCreate"
+                name="fun_fact"
+                rows="3"
+            ></textarea>
+
+        </div>
+
+        <button 
+            class="btn btn-primary"
+            type="submit"
+            role="button"
+        >Add Program</button>
+        </form>
+
+    </div>
+
+</main>
+
+<%- include('../partials/footer') %>

@@ -76,6 +76,14 @@ router.get('/streaming-platform-create', (req, res)=> {
     })
 })
 
+// program-form => http://localhost:1995/api/program/create
+router.get('/program-create', (req, res)=> {
+    res.render('pages/program-create', {
+        title: "Program Create Form",
+        name: "program create form"
+    })
+})
+
 // UPDATE
 // streaming-platform-update => http://localhost:1995/api/streaming_platform/:id/update
 router.get('/streaming-platform/:id/update', (req, res)=> {
