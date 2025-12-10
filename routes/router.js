@@ -151,6 +151,46 @@ router.get('/streaming-platforms', (req, res)=> {
     })
 })
 
+// All Directors 🎬 => http://localhost:1995/api/director
+router.get('/directors', (req, res)=> {
+
+    const url = `http://localhost:1995/api/director/`
+
+    axios.get(url)
+    .then(response => {
+
+        const page = parseInt(req.query.page) || 1
+        const data = response.data
+        const paginated = paginate(data, page, 10)
+
+        res.render('pages/directors', {
+            title: "All Directors",
+            directors: paginated.data,
+            pagination: paginated
+        })
+    })
+})
+
+// All Producers 👩🏼‍🍳 => http://localhost:1995/api/producer
+router.get('/producers', (req, res)=> {
+
+    const url = `http://localhost:1995/api/producer`
+
+    axios.get(url)
+    .then(response => {
+
+        const page = parseInt(req.query.page) || 1
+        const data = response.data
+        const paginated = paginate(data, page, 10)
+
+        res.render('pages/producers', {
+            title: "All Producers",
+            producers: paginated.data,
+            pagination: paginated
+        })
+    })
+})
+
 // Pages to programs 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️
 // actor - programs route => http://localhost:1995/api/actor/:id/programs
 router.get('/actor/:id/programs', (req, res)=> {
@@ -162,7 +202,9 @@ router.get('/actor/:id/programs', (req, res)=> {
     .then(response => {
         res.render('pages/actor-programs', {
             title: "Programs Featuring This Actor",
-            data: response.data.programs
+            actor: response.data.actor,
+            data: response.data.programs,
+            explanation: response.data.explanation
         })
     })
 })
@@ -185,6 +227,40 @@ router.get('/streaming_platform/:id/programs', (req, res)=> {
             data: paginated.data,
             explanation: response.data.explanation,
             pagination: paginated 
+        })
+    })
+})
+
+// directors - programs => http://localhost:1995/api/director/:id/programs
+router.get('/director/:id/programs', (req, res)=> {
+
+    const { id } = req.params
+    const url = `http://localhost:1995/api/director/${id}/programs`
+
+    axios.get(url)
+    .then(response => {
+        res.render('pages/director-programs', {
+            title: "Programs by This Director",
+            director: response.data.director,
+            data: response.data.programs,
+            explanation: response.data.explanation
+        })
+    })
+})
+
+// producers - programs => http://localhost:1995/api/producer/:id/programs
+router.get('/producer/:id/programs', (req, res)=> {
+
+    const { id } = req.params
+    const url = `http://localhost:1995/api/producer/${id}/programs`
+
+    axios.get(url)
+    .then(response => {
+        res.render('pages/producer-programs', {
+            title: "Programs by This Producer",
+            producer: response.data.producer,
+            data: response.data.programs,
+            explanation: response.data.explanation
         })
     })
 })

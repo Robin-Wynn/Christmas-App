@@ -2,17 +2,15 @@
 
 <main class="main" id="main">
 
-    <div class="container">
-
-        <div class="row">
+    <div class="row">
 
             <% if (data.length === 0) { %>
-                <p class="text-center">This actor has no programs.</p>
+                <p class="text-center">This producer has no programs.</p>
             <% } else { %>
 
                 <div class="container text-center platform-header">
         
-                    <h1 class="text-capitalize"><%= actor.first_name %> <%= actor.last_name %></h1>
+                    <h1><%= producer.producer %></h1>
                     <p><%= explanation %></p>
         
                 </div>
@@ -21,9 +19,9 @@
                     <% data.forEach(p => { %>
                         <li class="md-4">
 
-                            <div class="conatiner text-center">
+                            <div class="container text-center">
 
-                                <img src="/images/<%= p.img_url %>" alt="<%= p.title %> poster" class="program-thumb">
+                                <img src="/images/<%= p.img_url %>" alt="<%= p.title %> poster" class="img-thumbnail rounded mx-auto d-block">
                                 <h3><a href="/program/<%= p.program_id %>"><%= p.title %></a></h3>
                                 <p>Released: <%= p.yr_released %></p>
 

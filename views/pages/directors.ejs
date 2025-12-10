@@ -1,0 +1,71 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+
+    <div class="container">
+
+        <nav class="nav justify-content-center">
+
+            <a href="/" class="nav-link">Home</a>
+
+            <a href="/director-form" class="nav-link">Director Form</a>
+
+        </nav>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row row-cols-2 row-cols-md-2 row-cols-lg-5 g-3">
+
+            <% directors.forEach(director => { %>
+                
+                <div class="col">
+
+                    <div class="container">
+
+                        <div class="name text-capitalize">
+    
+                            <p><%= director.first_name %> <%= director.last_name %></p>
+    
+                        </div>
+    
+                        <div class="container actors-programs">
+    
+                            <a href="/director/<%= director.director_id %>/programs" class="programs">Programs</a>
+    
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </div>
+
+    <!-- pagination controls -->
+
+    <div class="pagination">
+
+        <% if (pagination.hasPrevPage) { %>
+
+            <a href="/directors?page= <%= pagination.currentPage - 1 %>"> ← Prev </a>
+
+        <% } %>
+
+        <span>Page <%= pagination.currentPage %> of <%= pagination.totalPages %></span>
+
+        <% if (pagination.hasNextPage) { %>
+         
+            <a href="/directors?page= <%= pagination.currentPage + 1 %>"> Next → </a>
+
+        <% } %>
+
+    </div>
+
+</main>
+
+<%- include('../partials/footer') %>
