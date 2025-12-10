@@ -61,3 +61,25 @@ document.querySelectorAll(".read-more-btn").forEach(button => {
         }
     })
 })
+
+// patch method forms
+document.getElementById("updateForm").addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    const updatedName = document.getElementById("platformName").value 
+
+    const res = await fetch(`api/streaming_platform/update/${req.params.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ streaming_platform: updatedName })
+    })
+
+    const data = await res.json()
+    console.log(data)
+
+    if (!data.error) {
+        alert("Updated!")
+    }
+})

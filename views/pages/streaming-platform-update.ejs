@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+
+    <div class="container">
+        <h2 class="text-center display-3"><%= name %></h2>
+        <form 
+            action="http://localhost:1995/api/streaming_platform/update/<%= id %>" 
+            method="patch"
+            class="row g-3 form"
+            id="updateForm"    
+        >
+        
+        <div class="col-md-6">
+            <label for="streaming_platform" class="form-label">
+                Streaming Platform:
+            </label>
+
+            <input 
+                type="text" 
+                name="streaming_platform" 
+                id="streaming_platform"
+                class="form-control"
+            />
+
+            <button
+                class="btn btn-secondary" 
+                type="submit"
+                role="button"
+            >Update Streaming Platform</button>
+
+        </div>
+    
+        </form>
+    </div>
+
+</main>
+
+<%- include('../partials/footer') %>

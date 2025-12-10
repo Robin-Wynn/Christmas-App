@@ -8,7 +8,7 @@
             action="http://localhost:1995/api/streaming_platform/create" 
             method="post"
             class="row g-3 form"
-            id="streaming_platformForm"
+            id="createForm"
         >
 
         <div class="col-md-6">
@@ -17,8 +17,9 @@
             </label>
 
             <input 
-                type="text" class="form-control"
-                id="streamingPlatform"
+                type="text" 
+                class="form-control"
+                id="streamingPlatformCreate"
                 name="streaming_platform"
             />
 
@@ -32,6 +33,7 @@
         </form>
     </div>
 
+    
 </main>
 
 <%- include('../partials/footer') %>

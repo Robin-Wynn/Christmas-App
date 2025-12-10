@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
     })
 })
 
+// Singles 👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼
 // Single Program 🎥=> http://localhost:1995/program/:id
 router.get('/program/:id', (req, res) => {
 
@@ -20,23 +21,45 @@ router.get('/program/:id', (req, res) => {
     const url = `http://localhost:1995/api/program/${id}/full`
 
     axios.get(url)
-        .then(response => {
-            // console.log("SINGLE PROGRAM DATA:", response.data)
-            res.render('pages/single-program', {
-                title: "Robin's full program details",
-                name: "Robin's Full Program Details!",
-                data: {
-                    program: response.data.program,
-                    actors: response.data.actors || [],
-                    directors: response.data.directors || [],
-                    platforms: response.data.platforms || [],
-                    producer: response.data.producer || null 
-                }
-            })
+    .then(response => {
+        // console.log("SINGLE PROGRAM DATA:", response.data)
+        res.render('pages/single-program', {
+            title: "Robin's full program details",
+            name: "Robin's Full Program Details!",
+            data: {
+                program: response.data.program,
+                actors: response.data.actors || [],
+                directors: response.data.directors || [],
+                platforms: response.data.platforms || [],
+                producer: response.data.producer || null 
+            }
         })
+    })
 }) 
 
+// Single streaming-platform => http://localhost:1995/streaming_platform/:id
+// router.get('/streaming-platform/:id', (req, res) => {
+    
+//     const { id } = req.params 
+//     const url = `http://localhost:1995/streaming_platform/${id}`
+
+//     axios.get(url)
+//     .then(response => {
+//         res.render('pages/streaming-platform-update', {
+//             title: "Update Streaming Platform",
+//             name: "update streaming platform",
+//             streaming_platform: response.data
+//         })
+//     })
+//     res.render('pages/streaming-platform-update', {
+//         title: "Update Streaming platform",
+//         name: "update streaming platform",
+//         id:id
+//     })
+// })
+
 // Forms 📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜
+// CREATE
 // actor form => http://localhost:1995/actor-form
 router.get('/actor-form', (req, res)=> {
     res.render('pages/actor-form', {
@@ -45,11 +68,29 @@ router.get('/actor-form', (req, res)=> {
     })
 })
 
-// streaming-plaform-form => http://localhost:1995/api/streaming_platform/create
-router.get('/streaming-platform-form', (req, res)=> {
-    res.render('pages/streaming-platform-form', {
-        title: "Streaming Platform Form",
-        name: "streaming-platform form"
+// streaming-plaform-create => http://localhost:1995/api/streaming_platform/create
+router.get('/streaming-platform-create', (req, res)=> {
+    res.render('pages/streaming-platform-create', {
+        title: "Streaming Platform Create Form",
+        name: "streaming-platform create form"
+    })
+})
+
+// UPDATE
+// streaming-platform-update => http://localhost:1995/api/streaming_platform/:id/update
+router.get('/streaming-platform/:id/update', (req, res)=> {
+
+    const { id } = req.params
+    const url = `http://localhost:1995/api/streaming_platform/${id}`
+
+    axios.get(url)
+    .then(response => {
+        res.render('pages/streaming-platform-update', {
+            title: 'Streaming Platform Update',
+            name: `Update ${response.data.streaming_platform}`,
+            id: id,
+            streaming_platform: response.data.streaming_platform
+        })
     })
 })
 
@@ -60,19 +101,19 @@ router.get('/programs', (req, res) => {
     const url = `http://localhost:1995/api/program/`
     
     axios.get(url)
-        .then(response => {
+    .then(response => {
 
-            const page = parseInt(req.query.page) || 1
-            const data = response.data
-            const paginated = paginate(data, page, 5)
+        const page = parseInt(req.query.page) || 1
+        const data = response.data
+        const paginated = paginate(data, page, 5)
 
-            res.render('pages/programs', {
-                title: 'All Christmas Programs',
-                name: "All Programs",
-                programs: paginated.data,
-                pagination: paginated 
-            })
+        res.render('pages/programs', {
+            title: 'All Christmas Programs',
+            name: "All Programs",
+            programs: paginated.data,
+            pagination: paginated 
         })
+    })
 })
 
 // All Actors 🎭 => http://localhost:1995/actors

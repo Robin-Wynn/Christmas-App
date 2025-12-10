@@ -8,7 +8,9 @@
 
             <a href="/" class="nav-link">Home</a>
 
-            <a href="/streaming-platform-form" class="nav-link">Streaming-Platform Form</a>
+            <a href="/streaming-platform-create" class="nav-link">Create a Streaming Platform</a>
+
+            <!-- <a href="/streaming-platform-update" class="nav-link">Update a Streaming Platform</a> -->
 
         </nav>
 
@@ -22,13 +24,24 @@
              
                 <div class="col">
     
-                    <a href="/streaming_platform/<%= platform.streaming_platform_id %>/programs" class="single-platform-link">
-    
-                        <h2 class="streaming-platform-name">
-                            <%= platform.streaming_platform %>
-                        </h2>
-    
-                    </a>
+                    <h2 class="streaming-platform-name">
+                        <%= platform.streaming_platform %>
+                    </h2>
+
+                    <div class="container">
+
+                        <a href="/streaming-platform/<%= platform.streaming_platform_id %>/programs" class="single-platform-link">
+                            Programs
+                        </a>
+                    </div>
+
+                    <div class="container">
+
+                        <a href="/streaming-platform/<%= platform.streaming_platform_id %>/update">
+                            Update 
+                        </a>
+                    </div>
+
                 </div>
             <% }) %>
 

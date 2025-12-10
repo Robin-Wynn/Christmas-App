@@ -46,7 +46,7 @@ router.post('/create', (req, res) => {
 // UPDATE a streaming_platform
 // http://localhost:1995/api/streaming_platform/update/:id
 router.patch('/update/:id', (req, res) => {
-	dao.update(req, res, dao.table, req.body, 'streaming_platform_id', req.params.id)
+	dao.update(req, res, dao.table)
 })
 
 

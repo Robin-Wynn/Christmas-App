@@ -123,15 +123,22 @@ const daoCommon = {
 			const fields = Object.keys(req.body)
 			const values = Object.values(req.body)
 
+			console.log(req.body)
+
 			con.execute(
 				`UPDATE ${table} SET ${fields.join(' = ?, ')} = ? WHERE ${table}_id = ?
 				;`,
 				[...values, req.params.id],
 				(error, dbres)=> {
 					if (!error) {
-						res.json({
-							"status": 'updated',
-							"changedRows": dbres.changedRows
+
+						// res.json({
+						// 	"status": 'updated',
+						// 	"changedRows": dbres.changedRows
+						// })
+						res.render('pages/success', {
+							title: 'success',
+							name: 'success'
 						})
 					} else {
 						res.json({
