@@ -4,7 +4,7 @@
 
     
     <% if (data.length === 0) { %>
-        <p class="text-center">No programs available on this platform.</p>
+        <p class="text-center background-container">No programs available on this platform.</p>
     <% } else { %>
             
         <div class="container text-center platform-header">
@@ -91,7 +91,7 @@
 
         <% if (pagination.hasPrevPage) { %>
 
-            <a href="/streaming_platform/<%= streaming_platform.streaming_platform_id %>/programs?page= <%= pagination.currentPage - 1 %>"> ← Prev </a>
+            <a href="/streaming-platform/<%= streaming_platform.streaming_platform_id %>/programs?page= <%= pagination.currentPage - 1 %>"> ← Prev </a>
 
         <% } %>
 
@@ -99,7 +99,7 @@
 
         <% if (pagination.hasNextPage) { %>
          
-            <a href="/streaming_platform/<%= streaming_platform.streaming_platform_id %>/programs?page= <%= pagination.currentPage + 1 %>"> Next → </a>
+            <a href="/streaming-platform/<%= streaming_platform.streaming_platform_id %>/programs?page= <%= pagination.currentPage + 1 %>"> Next → </a>
 
         <% } %>
 

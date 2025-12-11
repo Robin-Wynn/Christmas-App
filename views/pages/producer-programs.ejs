@@ -5,30 +5,33 @@
     <div class="row">
 
             <% if (data.length === 0) { %>
-                <p class="text-center">This producer has no programs.</p>
+                <p class="text-center background-container">This producer has no programs.</p>
             <% } else { %>
 
-                <div class="container text-center platform-header">
-        
-                    <h1><%= producer.producer %></h1>
-                    <p><%= explanation %></p>
-        
+                <div class="background-container">
+                    
+                    <div class="container text-center platform-header">
+            
+                        <h1><%= producer.producer %></h1>
+                        <p><%= explanation %></p>
+            
+                    </div>
+    
+                    <ul class="list-unstyled">
+                        <% data.forEach(p => { %>
+                            <li class="md-4">
+    
+                                <div class="container text-center">
+    
+                                    <img src="/images/<%= p.img_url %>" alt="<%= p.title %> poster" class="img-thumbnail rounded mx-auto d-block">
+                                    <h3><a href="/program/<%= p.program_id %>"><%= p.title %></a></h3>
+                                    <p>Released: <%= p.yr_released %></p>
+    
+                                </div>
+                            </li>
+                        <% }) %>
+                    </ul>
                 </div>
-
-                <ul class="list-unstyled">
-                    <% data.forEach(p => { %>
-                        <li class="md-4">
-
-                            <div class="container text-center">
-
-                                <img src="/images/<%= p.img_url %>" alt="<%= p.title %> poster" class="img-thumbnail rounded mx-auto d-block">
-                                <h3><a href="/program/<%= p.program_id %>"><%= p.title %></a></h3>
-                                <p>Released: <%= p.yr_released %></p>
-
-                            </div>
-                        </li>
-                    <% }) %>
-                </ul>
             <% } %>
 
         </div>

@@ -218,7 +218,7 @@ router.get('/actor/:id/programs', (req, res)=> {
 })
 
 // streaming-platforms - programs => http://localhost:1995/api/streaming_platform/:id/programs
-router.get('/streaming_platform/:id/programs', (req, res)=> {
+router.get('/streaming-platform/:id/programs', (req, res)=> {
 
     const { id } = req.params
     const url = `http://localhost:1995/api/streaming_platform/${id}/programs`

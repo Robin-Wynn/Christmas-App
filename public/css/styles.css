@@ -14,6 +14,17 @@ html{
     height: 100%;
 }
 
+h1, h2, span, button, h3{
+    font-family: "Unkempt", cursive;
+    font-weight: 700;
+    color: #ba0c0c;
+}
+
+nav, p, a, label, li{
+    font-family: "Delius", cursive;
+    color: #2a850e;
+}
+
 .poster{
     width: 100%;
     max-width: 300px;
@@ -27,10 +38,14 @@ html{
     object-fit: cover;
 }
 
-.details{
-    background-color: transparent;
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
+.program-details, .program-header, form, .card-body, .background-container{
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
 }
 
 .pagination{
@@ -39,8 +54,4 @@ html{
 
 #programTitle{
     font-size: 20px;
-}
-
-.card-body{
-    backdrop-filter: blur(10px);
 }
