@@ -29,7 +29,7 @@ const daoCommon = {
 		con.execute(
 			`SELECT COUNT(*) AS total FROM ${table};`,
 			(error, rows) => {
-				queryAction(res, error, rows, table)
+				queryAction(res, error, rows[0], table) //return an object NOT an array
 			}
 		)
 	},

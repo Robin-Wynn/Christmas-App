@@ -2,14 +2,15 @@
 
 <main class="main" id="main">
 
-    
-    <% if (data.length === 0) { %>
-        <p class="text-center background-container">No programs available on this platform.</p>
+    <% if (programs.length === 0) { %>
+        <p class="text-center background-container">
+            No programs available on this streaming platform.
+        </p>
     <% } else { %>
             
         <div class="container text-center platform-header">
         
-            <h1><%= streaming_platform.streaming_platform %></h1>
+            <h1 class="text-capitalize"><%= streaming_platform.streaming_platform %></h1>
             <p><%= explanation %></p>
         
         </div>
@@ -18,34 +19,34 @@
 
         <div class="row row-cols-2 row-cols-md-2 row-cols-lg-5 g-3">
 
-            <% data.forEach(p => { %>
+            <% programs.forEach(program => { %>
 
                 <div class="col">
                         
                     <div class="card h-100" id="programCard">
 
-                        <a href="/program/<%= p.program_id %>" class="single-program-link">
+                        <a href="/program/<%= program.program_id %>" class="single-program-link">
     
-                            <img src="/images/<%= p.img_url %>" id="programPoster" alt="<%= p.title %> poster" class="img-fluid card-img-top">
+                            <img src="/images/<%= program.img_url %>" id="programPoster" alt="<%= program.title %> poster" class="img-fluid card-img-top">
                                 
                         </a>
 
                         <div class="card-body details">
     
                             <h2 class="card-title" id="programTitle">
-                                <%= p.title %>
+                                <%= program.title %>
                             </h2>
     
                             <p class="card-text" id="yearReleased">
-                                Year Released: <%= p.yr_released %>
+                                Year Released: <%= program.yr_released %>
                             </p>
 
                             <p class="card-text" id="programRating">
-                                        Rating: <%= p.program_rating %>
+                                        Rating: <%= program.program_rating %>
                                     </p>
     
                                     <p class="card-text" id="robinsRating">
-                                        Robin's Rating: <%= p.robins_rating %>
+                                        Robin's Rating: <%= program.robins_rating %>
                                     </p>
 
                         </div>
@@ -53,7 +54,7 @@
                         <div class="card-footer">
         
                             <p class="text-body-secondary">
-                                <a href="https://www.imdb.com/title/<%= p.IMDb_id %>" 
+                                <a href="https://www.imdb.com/title/<%= program.IMDb_id %>" 
                                     class="btn btn-primary"
                                     target="_blank"
                                     id="imdbLink"
@@ -63,7 +64,7 @@
         
                                 </a>
         
-                                <a href="<%= p.wikipedia_url %>" 
+                                <a href="<%= program.wikipedia_url %>" 
                                     class="btn btn-primary"
                                     target="_blank"
                                     id="wikiUrl"

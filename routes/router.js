@@ -157,59 +157,89 @@ router.get('/streaming-platform/:id/update', (req, res)=> {
 
 // Full page datas 🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁
 // All Programs 🍿 => http://localhost:1995/programs
-router.get('/programs', (req, res) => {
+router.get('/programs', async(req, res) => {
 
-    const url = `http://localhost:1995/api/program/`
+    const programsUrl = `http://localhost:1995/api/program/`
+    const countUrl = `http://localhost:1995/api/program/count`
     
-    axios.get(url)
-    .then(response => {
-
+    try {
+        const [programsResponse, countResponse] = await axios.all([
+            axios.get(programsUrl),
+            axios.get(countUrl)
+        ])
         const page = parseInt(req.query.page) || 1
-        const data = response.data
+        const data = programsResponse.data
         const paginated = paginate(data, page, 5)
-
+    
         res.render('pages/programs', {
             title: 'All Christmas Programs',
             name: "All Programs",
             programs: paginated.data,
-            pagination: paginated 
+            pagination: paginated,
+            count: countResponse.data.total
         })
-    })
+        
+    } catch (error) {
+        console.error(error)
+        res.send("Error loading programs")
+    }
+    
 })
 
 // All Actors 🎭 => http://localhost:1995/actors
-router.get('/actors', (req, res)=> {
+router.get('/actors', async(req, res)=> {
 
-    const url = `http://localhost:1995/api/actor/`
+    const actorsUrl = `http://localhost:1995/api/actor/`
+    const countUrl = `http://localhost:1995/api/actor/count`
 
-    axios.get(url)
-    .then(response => {
-
+    try {
+        const [actorsResponse, countResponse] = await axios.all([
+            axios.get(actorsUrl),
+            axios.get(countUrl)
+        ])
         const page = parseInt(req.query.page) || 1
-        const data = response.data
+        const data = actorsResponse.data
         const paginated = paginate(data, page, 20)
     
         res.render('pages/actors', {
             title: 'All Actors',
             name: 'Actors Page',
             actors: paginated.data,
-            pagination: paginated
+            pagination: paginated,
+            count: countResponse.data.total
         })
-    })
+        
+    } catch (error) {
+        console.log(error)
+        res.send("Error loading actors")
+    }
+    
 })
 
 // All Streaming-platforms 📺 => http://localhost:1995/api/streaming_platform
-router.get('/streaming-platforms', (req, res)=> {
+router.get('/streaming-platforms', async(req, res)=> {
+    
+    const platformsUrl = `http://localhost:1995/api/streaming_platform/`
+    const countUrl = `http://localhost:1995/api/streaming_platform/count`
 
-    const url = `http://localhost:1995/api/streaming_platform/`
+    try {
+        const [platformsResponse, countResponse] = await axios.all([
+            axios.get(platformsUrl),
+            axios.get(countUrl)
+        ])
 
-    axios.get(url)
-    .then(response => {
+        const data = platformsResponse.data
+
         res.render('pages/streaming-platforms', {
             title: "All Streaming Platforms",
-            platforms: response.data
+            platforms: data,
+            count: countResponse.data.total
         })
-    })
+    } catch (error) {
+        console.log(error)
+        res.send("Error loading platforms")
+    }
+
 })
 
 // All Directors 🎬 => http://localhost:1995/api/director
@@ -293,13 +323,14 @@ router.get('/streaming-platform/:id/programs', (req, res)=> {
     .then(response => {
         // console.log(response.data)
         const page = parseInt(req.query.page) || 1
-        const allPrograms = response.data.programs
+        const data = response.data
+        const allPrograms = data.programs || []
         const paginated = paginate(allPrograms, page, 10)
         res.render('pages/streaming-platform-programs', {
             title: "Programs Currently Streaming",
-            streaming_platform: response.data.streaming_platform,
-            data: paginated.data,
-            explanation: response.data.explanation,
+            streaming_platform: data.streaming_platform,
+            programs: paginated.data,
+            explanation: data.explanation,
             pagination: paginated 
         })
     })

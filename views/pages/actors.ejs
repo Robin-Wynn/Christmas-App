@@ -12,6 +12,10 @@
 
         </nav>
 
+        <div class="container">
+            <p class="background-container">Total Actors: <%= count %></p>
+        </div>
+
     </div>
 
     <div class="container">
@@ -22,24 +26,25 @@
                 
                 <div class="col">
 
-                    <div class="card" id="actorCard">
+                    <div class="container background-container">
 
                         <img src="/images/<%= actor.img_url %>" id="actorImg" alt="<%= actor.first_name %> <%= actor.last_name %> photo" class="img-fluid card-img-top actor-img">
-                    </div>
-
-                    <div class="card-body">
-
-                        <div class="name text-capitalize">
-
-                            <p><%= actor.first_name %> <%= actor.last_name %></p>
-
+    
+                        <div class="container">
+    
+                            <div class="name text-capitalize">
+    
+                                <p><%= actor.first_name %> <%= actor.last_name %></p>
+    
+                            </div>
+    
+                            <div class="container actors-programs">
+    
+                                <a href="/actor/<%= actor.actor_id %>/programs" class="programs">Programs</a>
+    
+                            </div>
                         </div>
 
-                        <div class="container actors-programs">
-
-                            <a href="/actor/<%= actor.actor_id %>/programs" class="programs">Programs</a>
-
-                        </div>
                     </div>
                 </div>
     
