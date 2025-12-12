@@ -36,17 +36,52 @@ const daoCommon = {
 	
 	// SEARCH	 
 	search: (req, res, table) => {
+
+		const allowedFields = {
+			program: [
+				"title", 
+				"summary", 
+				"fun_fact",
+				"robins_rating",
+				"program_rating",
+				"runtime",
+				"IMDb_id",
+				"wikipedia_url"
+			],
+			actor: ["first_name", "last_name"],
+			producer: ["producer"],
+			streaming_platform: ["streaming_platform"],
+			director: ["first_name", "last_name"]
+		}
+
 		const { field, term } = req.query
 
-		if (!field || !term) {
+		// validate table
+		if(!allowedFields[table]) {
 			return res.json({
-				message: "Missing search field or term", 
-				example: `/program/search?field=title&term=foo`
+				error: true,
+				message: "Invalid table."
 			})
 		}
-		con.execute(
-			`SELECT * FROM ${table} WHERE ${field} LIKE ?`,
-			[`%${term}%`],
+
+		// validate field
+		if(!allowedFields[table].includes(field)) {
+			return res.json({
+				error: true,
+				message: `Invalid search field. Allowed fields: ${allowedFields[table].join(", ")}`
+			})
+		}
+
+		if(!term) {
+			return res.json({
+				error: true,
+				message: "Missing search term."
+			})
+		}
+		
+		const sql = `SELECT * FROM ${table} WHERE ${field} LIKE ?;`
+
+		con.execute(sql, [`%${term}%`],
 			(error, rows) => {
 				queryAction(res, error, rows, table)
 			}

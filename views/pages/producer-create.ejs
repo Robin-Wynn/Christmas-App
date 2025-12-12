@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+
+<main class="main" id="main">
+
+    <div class="container">
+
+        <form 
+            action="http://localhost:1995/api/producer/create" 
+            method="post"
+            class="row g-3 form"
+            id="producerForm"
+        >
+
+        <div class="col-md-6">
+            <label for="producer" class="form-label">
+                Producer/Production Company:
+            </label>
+
+            <input 
+                type="text" class="form-control"
+                id="producer"
+                name="producer"
+            />
+
+        </div>
+
+        <button 
+            class="btn btn-primary"
+            type="submit"
+            role="button"
+        >Add Producer</button>
+        </form>
+    </div>
+
+</main>
+
+<%- include('../partials/footer') %>

@@ -13,6 +13,37 @@ router.get('/', (req, res) => {
     })
 })
 
+// Search on Homepage
+router.get('/search', (req, res) => {
+    const { table, field, term } = req.query
+    
+    if (!table || !field || !term) {
+        return res.render('pages/search-results', {
+            title: "Search Results",
+            results: [],
+            term,
+            table,
+            error: "Missing table, field, or search term."
+        })
+    }
+
+    const url = `http://localhost:1995/api/${table}/search?field=${field}&term=${term}`
+
+    axios.get(url)
+    .then(response => {
+        let results = response.data
+        const normalized = Array.isArray(results) ? results : [results]
+        // console.log(response.data)
+        res.render('pages/search-results', {
+            title: "Search Results",
+            results: normalized,
+            term,
+            table,
+            error: null
+        })
+    })
+})
+
 // Singles 👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼👧🏼
 // Single Program 🎥=> http://localhost:1995/program/:id
 router.get('/program/:id', (req, res) => {
@@ -61,10 +92,10 @@ router.get('/program/:id', (req, res) => {
 // Forms 📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜
 // CREATE
 // actor form => http://localhost:1995/actor-form
-router.get('/actor-form', (req, res)=> {
-    res.render('pages/actor-form', {
-        title: 'Actor Form',
-        name: 'actor-form'
+router.get('/actor-create', (req, res)=> {
+    res.render('pages/actor-create', {
+        title: 'Actor Create Form',
+        name: 'actor create form'
     })
 })
 
@@ -76,11 +107,33 @@ router.get('/streaming-platform-create', (req, res)=> {
     })
 })
 
-// program-form => http://localhost:1995/api/program/create
-router.get('/program-create', (req, res)=> {
-    res.render('pages/program-create', {
-        title: "Program Create Form",
-        name: "program create form"
+// producer-create => http://localhost:1995/api/producer/create
+router.get('/producer-create', (req, res)=> {
+    res.render('pages/producer-create', {
+        title: "Producer Create Form",
+        name: "producer create form"
+    })
+})
+
+// director-create => http://localhost:1995/api/director/create
+router.get('/director-create', (req, res)=> {
+    res.render('pages/director-create', {
+        title: "Director Create Form",
+        name: "director create form"
+    })
+})
+// program-create => http://localhost:1995/api/program/create
+router.get('/program-create', async (req, res)=> {
+
+    const url = `http://localhost:1995/api/producer`
+
+    axios.get(url)
+    .then(response => {
+        res.render('pages/program-create', {
+            title: "Program Create Form",
+            name: "program create form",
+            allProducers: response.data
+        })
     })
 })
 

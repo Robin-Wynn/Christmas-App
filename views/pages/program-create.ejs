@@ -56,19 +56,28 @@
 
         </div>
 
-<!-- This is tricky tricky -->
         <div class="col-md-6">
             <label for="producer_id" class="form-label">
                 Producer ID:
             </label>
 
-            <input 
-                type="text" 
-                class="form-control"
-                id="producer_idCreate"
+            <select
+                class="form-select"
                 name="producer_id"
-                placeholder="Producer ID #"
-            />
+                id="producerCreate"
+            >
+                
+                <option value="">-- Choose Producer --</option>
+                
+                <% allProducers.forEach(p => { %>
+                    <option 
+                        value="<%= p.producer_id %>"
+                    >
+                        <%= p.producer %>
+
+                    </option>
+                <% }) %>
+            </select>
 
         </div>
 
@@ -123,6 +132,7 @@
                 id="robins_ratingCreate"
                 name="robins_rating"
             >
+                <option value="">-- Choose Rating --</option>
                 <option value="NA">NA</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
