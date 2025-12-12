@@ -274,6 +274,20 @@ const programDao = {
 				)
 			}
 		)
+	},
+
+	funFacts: (res, table)=> {
+		con.execute(
+			`SELECT 
+				program_id,
+				title,
+				fun_fact
+			FROM program
+			WHERE fun_fact IS NOT NULL AND fun_fact != '' 
+			;`,
+			[],
+			(error, rows) => queryAction(res, error, rows, table)
+		)
 	}
 }
 

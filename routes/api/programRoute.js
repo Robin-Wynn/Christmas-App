@@ -37,6 +37,12 @@ router.get('/:id/full', (req, res) => {
 	dao.getFullProgramById(res, req.params.id)
 })
 
+// GET fun facts
+// http://localhost:1995/api/program/fun-facts
+router.get('/fun-facts', (req, res) => {
+	dao.funFacts(res, dao.table)
+})
+
 // COUNT all programs
 // http://localhost:1995/api/program/count
 router.get('/count', (req, res) => {

@@ -10,6 +10,8 @@
 
                 <a href="/program-create" class="nav-link">Program Form</a>
 
+                <a href="/fun-facts" class="nav-link">Fun Facts</a>
+
             </nav>
 
         </div>
@@ -43,7 +45,7 @@
                                         Summary: <%= program.summary %>
                                     </p>
 
-                                    <button type="button" class="btn btn-danger read-more-btn" data-btnId="<%= program.program_id %>">Read More</button>
+                                    <button type="button" class="btn btn-danger read-more-btn" data-id="<%= program.program_id %>">Read More</button>
     
                                     <p class="card-text" id="programRating">
                                         Rating: <%= program.program_rating %>

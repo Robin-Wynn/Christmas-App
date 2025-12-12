@@ -1,22 +1,4 @@
-// console.log("Hello World") 
-// const text = document.querySelectorAll(".programSummary")
-// text.forEach(summary => summary.style.display = 'none')
-
-// function readMore(nodeList) {
-//     nodeList.forEach(el => {
-        
-//     })
-// }
-
-// const readMoreBtn = document.querySelectorAll('read-more-btn')
-
-// readMoreBtn.forEach(button => {
-//     button.addEventListener('click', (e)=> {
-//         e.preventDefault()
-//         if (button.getAttribute('data-btnId') == )
-//     })
-// })
-
+// READ MORE BUTTON
 const VISIBLE_WORD_COUNT = 6
 
 document.querySelectorAll(".programSummary").forEach(summary => {
@@ -56,7 +38,7 @@ document.querySelectorAll(".read-more-btn").forEach(button => {
             button.textContent = "Read More"
         } else {
             summary.textContent = summary.dataset.full
-            summary.dataset.expanded = "True"
+            summary.dataset.expanded = "true"
             button.textContent = "Read Less"
         }
     })

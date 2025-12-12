@@ -252,6 +252,19 @@ router.get('/producers', (req, res)=> {
     })
 })
 
+// Fun Facts => http://localhost:1995/api/program/fun-facts
+router.get('/fun-facts', (req, res)=> {
+    const url = `http://localhost:1995/api/program/fun-facts`
+
+    axios.get(url)
+    .then(response => {
+        res.render('pages/fun-facts', {
+            title: "Fun Facts",
+            fun_facts: response.data
+        })
+    })
+})
+
 // Pages to programs 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️
 // actor - programs route => http://localhost:1995/api/actor/:id/programs
 router.get('/actor/:id/programs', (req, res)=> {
