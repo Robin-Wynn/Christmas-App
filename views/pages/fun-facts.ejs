@@ -8,17 +8,14 @@
 
             <% fun_facts.forEach(fact => { %>
 
-                <a href="/program/<%= fact.program_id %>">
-
-                    <div class="col">
-                        <div class="card p-3 shadow-sm">
-    
+                <div class="col">
+                    <div class="card p-3 shadow-sm">
+                        <a href="/program/<%= fact.program_id %>">
                             <h4><%= fact.title %></h4>
-                            <p><%= fact.fun_fact %></p>
-                        </div>
+                        </a>
+                        <p><%= fact.fun_fact %></p>
                     </div>
-
-                </a>
+                </div>
                 
             <% }) %>
         </div>

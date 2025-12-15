@@ -2,58 +2,46 @@
 
     <main class="main" id="main">
 
-        <nav class="navbar navbar-expand-lg bs-danger-bg-subtle">
+        
 
-            <div class="container-fluid background-container">
+        <div class="container">
+
+            <form action="/search" method="get" class="d-flex me-2 search-bar">
     
-                <a href="/" class="nav-link active">Home</a>
-                <a href="/programs" class="nav-link">Programs</a>
-                <a href="/streaming-platforms" class="nav-link">Streaming Platforms</a>
-                <a href="/actors" class="nav-link">Actors</a>
-                <a href="/directors" class="nav-link">Directors</a>
-                <a href="/producers" class="nav-link">Producers</a>
-                
-                <form action="/search" method="get" class="d-flex me-2 search-bar">
-        
-                    <input type="text" name="term" id="searchTerm" placeholder="Search everything..." required class="form-control me-2">
-        
-                    <select name="table" id="table" class="form-select">
-                        <option value="">-- choose a table --</option>
-                        <option value="program">Programs</option>
-                        <option value="actor">Actors</option>
-                        <option value="producer">Producers</option>
-                        <option value="director">Directors</option>
-                        <option value="streaming_platform">Platforms</option>
-                    </select>
-        
-                    <select name="field" id="field" class="form-select">
-                        <option value="">-- choose a field --</option>
-                        <option value="title">Title</option>
-                        <option value="runtime">Runtime</option>
-                        <option value="producer_id">Producer ID</option>
-                        <option value="format">Format</option>
-                        <option value="program_rating">Program Rating</option>
-                        <option value="robins_rating">Robin's Rating</option>
-                        <option value="IMDb_id">IMDB ID</option>
-                        <option value="wikipedia_url">Wikipedia URL</option>
-                        <option value="img_url">Image URL</option>
-                        <option value="summary">Summary</option>
-                        <option value="fun_fact">Fun Fact</option>
-                        <option value="producer">Producer</option>
-                        <option value="streaming_platform">Platform</option>
-                        <option value="first_name">First Name</option>
-                        <option value="last_name">Last Name</option>
-                    </select>
-        
-                    <button type="submit" class="btn btn-outline-success">🔍Search</button>
-        
-                </form>
-              
-                
-            </div>
-            
-            
-        </nav>
+                <input type="text" name="term" id="searchTerm" placeholder="Search everything..." required class="form-control me-2">
+    
+                <select name="table" id="table" class="form-select">
+                    <option value="">-- choose a table --</option>
+                    <option value="program">Programs</option>
+                    <option value="actor">Actors</option>
+                    <option value="producer">Producers</option>
+                    <option value="director">Directors</option>
+                    <option value="streaming_platform">Platforms</option>
+                </select>
+    
+                <select name="field" id="field" class="form-select">
+                    <option value="">-- choose a field --</option>
+                    <option value="title">Title</option>
+                    <option value="runtime">Runtime</option>
+                    <option value="producer_id">Producer ID</option>
+                    <option value="format">Format</option>
+                    <option value="program_rating">Program Rating</option>
+                    <option value="robins_rating">Robin's Rating</option>
+                    <option value="IMDb_id">IMDB ID</option>
+                    <option value="wikipedia_url">Wikipedia URL</option>
+                    <option value="img_url">Image URL</option>
+                    <option value="summary">Summary</option>
+                    <option value="fun_fact">Fun Fact</option>
+                    <option value="producer">Producer</option>
+                    <option value="streaming_platform">Platform</option>
+                    <option value="first_name">First Name</option>
+                    <option value="last_name">Last Name</option>
+                </select>
+    
+                <button type="submit" class="btn btn-outline-success">🔍Search</button>
+    
+            </form>
+        </div>
         
         <p class="text-center">
             Welcome to my Christmas Program App where you can add your own programs too!
