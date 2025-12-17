@@ -18,7 +18,7 @@ router.get('/search', (req, res) => {
     const { table, field, term } = req.query
     
     if (!table || !field || !term) {
-        return res.render('pages/search-results', {
+        res.render('pages/search-results', {
             title: "Search Results",
             results: [],
             term,
@@ -138,14 +138,15 @@ router.get('/program-create', async (req, res)=> {
 })
 
 // UPDATE
-// streaming-platform-update => http://localhost:1995/api/streaming_platform/:id/update
-router.get('/streaming-platform/:id/update', (req, res)=> {
+// streaming-platform-update => http://localhost:1995/api/streaming_platform/update/:id
+router.get('/streaming-platform-update/:id', (req, res)=> {
 
     const { id } = req.params
     const url = `http://localhost:1995/api/streaming_platform/${id}`
 
     axios.get(url)
     .then(response => {
+        console.log(response.data)
         res.render('pages/streaming-platform-update', {
             title: 'Streaming Platform Update',
             name: `Update ${response.data.streaming_platform}`,

@@ -35,7 +35,8 @@ const programDao = {
             	    img_url: rows[0].program_img
             	}
 
-            	const actors = rows.map(r => ({
+				// looping method to loop through an array 
+            	const actors = rows.map(r => ({  // transform every item -> new array
             	    actor_id: r.actor_id,
             	    first_name: r.first_name,
             	    last_name: r.last_name,

@@ -48,7 +48,7 @@ document.querySelectorAll(".read-more-btn").forEach(button => {
 document.getElementById("updateForm").addEventListener("submit", async (e) => {
     e.preventDefault()
 
-    const updatedName = document.getElementById("platformName").value 
+    const updatedName = document.getElementById("streaming_platform").value 
 
     const res = await fetch(`api/streaming_platform/update/${req.params.id}`, {
         method: "PATCH",
